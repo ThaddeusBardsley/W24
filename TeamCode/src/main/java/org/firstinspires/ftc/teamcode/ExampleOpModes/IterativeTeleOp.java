@@ -5,7 +5,10 @@ import static org.firstinspires.ftc.teamcode.Utilities.OpModeUtils.setOpMode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.teamcode.DriveSystem.Drivetrain;
 
 
 //@Disabled
@@ -14,6 +17,8 @@ public class IterativeTeleOp extends OpMode {
 
     // Declare OpMode members.
     private final ElapsedTime runtime = new ElapsedTime();
+    public Drivetrain drivetrain;
+
 
 
 
@@ -25,9 +30,7 @@ public class IterativeTeleOp extends OpMode {
     public void init() {
         setOpMode(this);
 
-        /*
-                    Y O U R   C O D E   H E R E
-                                                    */
+        drivetrain = new Drivetrain();
 
         multTelemetry.addData("Status", "Initialized");
         multTelemetry.addLine(":-)");
@@ -72,10 +75,9 @@ public class IterativeTeleOp extends OpMode {
 
     @Override
     public void loop() {
+                                    //This changes the speed
+    drivetrain.drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x, 1                                                                                                                                );
 
-    /*
-         ----------- L O G G I N G -----------
-                                            */
         multTelemetry.addData("Status", "Loop Active");
         multTelemetry.update();
     }

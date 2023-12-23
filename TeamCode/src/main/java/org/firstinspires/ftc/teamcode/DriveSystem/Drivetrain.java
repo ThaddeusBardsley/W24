@@ -17,7 +17,11 @@ public class Drivetrain {
         br = hardwareMap.get(DcMotor.class, "br");
     }
     public void drive (double YPower, double XPower, double HeadingPower, double Speed){
-        
+
+        fl.setPower(-(YPower - XPower + HeadingPower) * Speed);
+        fr.setPower((YPower + XPower - HeadingPower) * Speed);
+        bl.setPower(-(YPower + XPower + HeadingPower) * Speed);
+        br.setPower((YPower - XPower - HeadingPower) * Speed);
 
     }
 }
