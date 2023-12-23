@@ -19,7 +19,7 @@ public class IterativeTeleOp extends OpMode {
 
 
     /*
-     * Code to run ONCE when the driver hits INIT
+    Code to run ONCE when the driver hits INIT
      */
     @Override
     public void init() {
