@@ -1,9 +1,9 @@
 package org.firstinspires.ftc.teamcode.TeleOP;
 
-
+import static org.firstinspires.ftc.teamcode.Utilities.DashPos.servolocation;
 import static org.firstinspires.ftc.teamcode.Utilities.DashPos.servo1pos;
 import static org.firstinspires.ftc.teamcode.Utilities.DashPos.servo2pos;
-import static org.firstinspires.ftc.teamcode.Utilities.DashPos.servo3pos;
+
 import static org.firstinspires.ftc.teamcode.Utilities.OpModeUtils.multTelemetry;
 import static org.firstinspires.ftc.teamcode.Utilities.OpModeUtils.setOpMode;
 
@@ -18,7 +18,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 //@Disabled
 @TeleOp(name="TeleOp servo", group="Iterative Opmode")
 public class SERVO extends OpMode {
-    Servo bob;
+    Servo servo;
     Servo jamie;
     Servo casie;
 
@@ -31,7 +31,7 @@ public class SERVO extends OpMode {
     @Override
     public void init() {
         setOpMode(this);
-        bob = hardwareMap.get(Servo.class,"bob");
+        servo = hardwareMap.get(Servo.class,"servo");
         jamie = hardwareMap.get(Servo.class, "jamie");
         casie = hardwareMap.get(Servo.class, "casie");
 
@@ -78,7 +78,7 @@ public class SERVO extends OpMode {
     @Override
     public void loop() {
         //This changes the speed);
-        bob.setPosition(servo3pos);
+        servo.setPosition(servolocation);
         jamie.setPosition(servo2pos);
         casie.setPosition(servo1pos);
 

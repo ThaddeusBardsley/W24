@@ -5,23 +5,18 @@ import static org.firstinspires.ftc.teamcode.Utilities.OpModeUtils.setOpMode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.DriveSystem.Drivetrain;
+import org.firstinspires.ftc.teamcode.TeleOP.Drivetrain;
 
 
 //@Disabled
-@TeleOp(name="Example Iterative TeleOp", group="Iterative Opmode")
+@TeleOp(name="Iterative TeleOp", group="Iterative Opmode")
 public class IterativeTeleOp extends OpMode {
 
     // Declare OpMode members.
     private final ElapsedTime runtime = new ElapsedTime();
     public Drivetrain drivetrain;
-
-
-
-
 
     /*
     Code to run ONCE when the driver hits INIT
@@ -75,12 +70,17 @@ public class IterativeTeleOp extends OpMode {
 
     @Override
     public void loop() {
-                                    //This changes the speed
-    drivetrain.drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x, 1                                                                                                                                );
+        double speed = 1;
+        if (gamepad1.left_trigger > .5){
+            speed = .5;
+        }
+                                   //This changes the speed
+    drivetrain.drive(gamepad1.left_stick_y, gamepad1.left_stick_x, -gamepad1.right_stick_x, speed);
 
         multTelemetry.addData("Status", "Loop Active");
         multTelemetry.update();
     }
+
 
 
     /*

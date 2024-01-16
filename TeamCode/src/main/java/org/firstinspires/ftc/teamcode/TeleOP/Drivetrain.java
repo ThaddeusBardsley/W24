@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.DriveSystem;
+package org.firstinspires.ftc.teamcode.TeleOP;
 
 import static org.firstinspires.ftc.teamcode.Utilities.OpModeUtils.hardwareMap;
 
@@ -18,10 +18,16 @@ public class Drivetrain {
     }
     public void drive (double YPower, double XPower, double HeadingPower, double Speed){
 
+        //
         fl.setPower(-(YPower - XPower + HeadingPower) * Speed);
+        //
         fr.setPower((YPower + XPower - HeadingPower) * Speed);
+        //
         bl.setPower(-(YPower + XPower + HeadingPower) * Speed);
+        //backwards
         br.setPower((YPower - XPower - HeadingPower) * Speed);
+
+
 
     }
 }
