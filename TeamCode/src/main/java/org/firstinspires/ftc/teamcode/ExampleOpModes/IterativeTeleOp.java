@@ -3,11 +3,14 @@ package org.firstinspires.ftc.teamcode.ExampleOpModes;
 import static org.firstinspires.ftc.teamcode.Utilities.OpModeUtils.multTelemetry;
 import static org.firstinspires.ftc.teamcode.Utilities.OpModeUtils.setOpMode;
 
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.TeleOP.Drivetrain;
+import org.firstinspires.ftc.teamcode.Utilities.MathUtils;
+import org.opencv.core.Point;
 
 
 //@Disabled
@@ -71,11 +74,17 @@ public class IterativeTeleOp extends OpMode {
     @Override
     public void loop() {
         double speed = 1;
+        Point driveStrafePoint = new Point((int)gamepad1.left_stick_x, (int)gamepad1.left_stick_y);
+        driveStrafePoint = MathUtils.shift(driveStrafePoint, drivetrain.gyro.getHeading());
+        double drive = driveStrafePoint.y;
+        double strafe = driveStrafePoint.x;
+        double turn = -gamepad1.right_stick_x;
+
         if (gamepad1.left_trigger > .5){
             speed = .5;
         }
                                    //This changes the speed
-    drivetrain.drive(gamepad1.left_stick_y, gamepad1.left_stick_x, -gamepad1.right_stick_x, speed);
+    drivetrain.drive(drive, strafe, turn, speed);
 
         multTelemetry.addData("Status", "Loop Active");
         multTelemetry.update();
