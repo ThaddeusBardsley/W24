@@ -18,10 +18,6 @@ public class IterativeTeleOp extends OpMode {
     private final ElapsedTime runtime = new ElapsedTime();
     public Drivetrain drivetrain;
 
-
-
-
-
     /*
     Code to run ONCE when the driver hits INIT
      */
@@ -74,18 +70,12 @@ public class IterativeTeleOp extends OpMode {
 
     @Override
     public void loop() {
-                                    //This changes the speed
-    drivetrain.drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x, 1);
-
-
-    while(gamepad1.left_trigger){
-        drivetrain.drive(.5,.5,.5,.5);
+        double speed = 1;
+        if (gamepad1.left_trigger > .5){
+            speed = .5;
         }
-
-    drivetrain.drive(gamepad1.left_trigger,.5,.5,.5);
-
-    if(drivetrain.drive(gamepad1.left_trigger, .5,.5,.5);
-    else(drivetrain.drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x,1)
+                                   //This changes the speed
+    drivetrain.drive(gamepad1.left_stick_y, gamepad1.left_stick_x, -gamepad1.right_stick_x, speed);
 
         multTelemetry.addData("Status", "Loop Active");
         multTelemetry.update();
