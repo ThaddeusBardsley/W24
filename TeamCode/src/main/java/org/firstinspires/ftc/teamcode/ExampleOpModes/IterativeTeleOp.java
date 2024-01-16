@@ -82,7 +82,10 @@ public class IterativeTeleOp extends OpMode {
         drivetrain.drive(.5,.5,.5,.5);
         }
 
-    drivetrain.drive(gamepad1.left_trigger,.5, .5, .5);
+    drivetrain.drive(gamepad1.left_trigger,.5,.5,.5);
+
+    if(drivetrain.drive(gamepad1.left_trigger, .5,.5,.5);
+    else(drivetrain.drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x,1)
 
         multTelemetry.addData("Status", "Loop Active");
         multTelemetry.update();
