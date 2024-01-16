@@ -73,9 +73,12 @@ public class IterativeTeleOp extends OpMode {
 
     @Override
     public void loop() {
+        drivetrain.gyro.update();
+
+
         double speed = 1;
-        Point driveStrafePoint = new Point((int)gamepad1.left_stick_x, (int)gamepad1.left_stick_y);
-        driveStrafePoint = MathUtils.shift(driveStrafePoint, drivetrain.gyro.getHeading());
+        Point driveStrafePoint = new Point(gamepad1.left_stick_x, gamepad1.left_stick_y);
+        driveStrafePoint = MathUtils.shift(driveStrafePoint, Math.toDegrees(drivetrain.gyro.getHeading()));
         double drive = driveStrafePoint.y;
         double strafe = driveStrafePoint.x;
         double turn = -gamepad1.right_stick_x;
@@ -84,10 +87,12 @@ public class IterativeTeleOp extends OpMode {
             speed = .5;
         }
                                    //This changes the speed
-    drivetrain.drive(drive, strafe, turn, speed);
+        drivetrain.drive(drive, strafe, turn, speed);
 
         multTelemetry.addData("Status", "Loop Active");
+        multTelemetry.addData("heading", drivetrain.gyro.getHeading());
         multTelemetry.update();
+
     }
 
 
