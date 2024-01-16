@@ -76,9 +76,13 @@ public class IterativeTeleOp extends OpMode {
     public void loop() {
                                     //This changes the speed
     drivetrain.drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x, 1);
+
+
     while(gamepad1.left_trigger){
-        drivetrain.drive(1,1,1,1,);
+        drivetrain.drive(.5,.5,.5,.5);
         }
+
+    drivetrain.drive(gamepad1.left_trigger,.5, .5, .5);
 
         multTelemetry.addData("Status", "Loop Active");
         multTelemetry.update();
