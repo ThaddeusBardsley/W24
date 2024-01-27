@@ -19,14 +19,13 @@ import org.opencv.core.Point;
 @Autonomous(name="Auto", group="Linear Opmode")
 public class LinearAuto extends LinearOpMode {
 
-    public Drivetrain drivetrain;
-    drivetrain = new Drivetrain();
+    public Drivetrain drivetrain = new Drivetrain();
     
 
     @Override
     public void runOpMode() {
         while (opModeIsActive()) {
-            drivetrain.drive()
+            drivetrain.drive(1,1,1,1);
 
 
         }
