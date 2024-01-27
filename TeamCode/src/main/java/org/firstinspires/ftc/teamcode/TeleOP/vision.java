@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.Utilities.Vision.VisionPipelineBlue;
+import org.firstinspires.ftc.teamcode.Utilities.Vision.VisionPipelineGreen;
 import org.firstinspires.ftc.teamcode.Utilities.Vision.VisionPipelineRed;
 import org.firstinspires.ftc.teamcode.Utilities.Vision.VisionProcessing;
 import org.firstinspires.ftc.vision.VisionPortal;
@@ -22,7 +23,8 @@ private WebcamName webcam1;
 //To change between colors, comment one and comment the other.
 private OpenCvCamera camera;
 //VisionPipelineBlue pipeline = new VisionPipelineBlue();
-VisionPipelineRed pipeline = new VisionPipelineRed();
+//VisionPipelineRed pipeline = new VisionPipelineRed();
+    VisionPipelineGreen pipeline = new VisionPipelineGreen();
 
     @Override
     public void init() {
