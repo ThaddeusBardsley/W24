@@ -6,6 +6,8 @@ import static org.firstinspires.ftc.teamcode.Utilities.OpModeUtils.setOpMode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.TeleOP.Drivetrain;
@@ -20,6 +22,10 @@ public class IterativeTeleOp extends OpMode {
     // Declare OpMode members.
     private final ElapsedTime runtime = new ElapsedTime();
     public Drivetrain drivetrain;
+    Servo casie;
+    Servo jamie;
+    CRServo servo;
+
 
     /*
     Code to run ONCE when the driver hits INIT
@@ -29,9 +35,14 @@ public class IterativeTeleOp extends OpMode {
         setOpMode(this);
 
         drivetrain = new Drivetrain();
+        casie = hardwareMap.get(Servo.class, "casie");
+        servo = hardwareMap.get(CRServo.class,"servo");
+        jamie = hardwareMap.get(Servo.class, "jamie");
 
+        multTelemetry.addLine("Launching Espire Console 0.032");
         multTelemetry.addData("Status", "Initialized");
         multTelemetry.addLine(":-)");
+
         multTelemetry.update();
     }
 
@@ -83,11 +94,34 @@ public class IterativeTeleOp extends OpMode {
         double strafe = driveStrafePoint.x;
         double turn = -gamepad1.right_stick_x;
 
-        if (gamepad1.left_trigger > .5){
+        if (gamepad1.left_trigger > .5) {
             speed = .5;
         }
-                                   //This changes the speed
+        //This changes the speed
         drivetrain.drive(drive, strafe, turn, speed);
+
+
+        if (gamepad1.a){
+            casie.setPosition(1);
+        } else {
+            casie.setPosition(0);
+        }
+
+        if (gamepad1.b){
+            jamie.setPosition(1);
+        }
+
+        if (gamepad1.x){
+            jamie.setPosition(0);
+        }
+
+        while (gamepad1.left_bumper){
+            servo.setPower(1);
+        }
+
+        while (gamepad1.right_bumper){
+            servo.setPower(-1);
+        }
 
         multTelemetry.addData("Status", "Loop Active");
         multTelemetry.addData("heading", drivetrain.gyro.getHeading());
@@ -96,21 +130,16 @@ public class IterativeTeleOp extends OpMode {
     }
 
 
-
     /*
      * Code to run ONCE when the driver hits STOP
      */
     @Override
-    public void stop(){
+    public void stop() {
 
         /*
                     Y O U R   C O D E   H E R E
                                                    */
-        }
-
-
-
-
-        
     }
 
+
+}
