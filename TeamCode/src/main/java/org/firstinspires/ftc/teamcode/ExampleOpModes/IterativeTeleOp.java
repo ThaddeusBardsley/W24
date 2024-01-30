@@ -7,6 +7,7 @@ import static org.firstinspires.ftc.teamcode.Utilities.OpModeUtils.setOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -24,7 +25,8 @@ public class IterativeTeleOp extends OpMode {
     public Drivetrain drivetrain;
     Servo casie;
     Servo jamie;
-    CRServo servo;
+    Servo servo;
+    DcMotor motor1;
 
 
     /*
@@ -36,7 +38,7 @@ public class IterativeTeleOp extends OpMode {
 
         drivetrain = new Drivetrain();
         casie = hardwareMap.get(Servo.class, "casie");
-        servo = hardwareMap.get(CRServo.class,"servo");
+        servo = hardwareMap.get(Servo.class,"servo");
         jamie = hardwareMap.get(Servo.class, "jamie");
 
         multTelemetry.addLine("Launching Espire Console 0.032");
@@ -100,6 +102,7 @@ public class IterativeTeleOp extends OpMode {
         //This changes the speed
         drivetrain.drive(drive, strafe, turn, speed);
 
+int jamiePos = 0;
 
         if (gamepad1.a){
             casie.setPosition(1);
@@ -108,19 +111,20 @@ public class IterativeTeleOp extends OpMode {
         }
 
         if (gamepad1.b){
-            jamie.setPosition(1);
+            jamiePos = 1;
+            jamie.setPosition(jamiePos);
+        }
+        if (jamiePos == 1 && gamepad1.b){
+            jamiePos = -1;
+            jamie.setPosition(jamiePos);
         }
 
-        if (gamepad1.x){
-            jamie.setPosition(0);
+        if (gamepad1.left_bumper){
+            servo.setPosition(1);
         }
 
-        while (gamepad1.left_bumper){
-            servo.setPower(1);
-        }
-
-        while (gamepad1.right_bumper){
-            servo.setPower(-1);
+        if (gamepad1.right_bumper){
+            servo.setPosition(-1);
         }
 
         multTelemetry.addData("Status", "Loop Active");
@@ -128,7 +132,6 @@ public class IterativeTeleOp extends OpMode {
         multTelemetry.update();
 
     }
-
 
     /*
      * Code to run ONCE when the driver hits STOP
