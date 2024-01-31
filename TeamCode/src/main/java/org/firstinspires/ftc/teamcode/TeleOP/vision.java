@@ -22,9 +22,9 @@ private WebcamName webcam1;
 
 //To change between colors, comment one and comment the other.
 private OpenCvCamera camera;
-//VisionPipelineBlue pipeline = new VisionPipelineBlue();
+VisionPipelineBlue pipeline = new VisionPipelineBlue();
 //VisionPipelineRed pipeline = new VisionPipelineRed();
-    VisionPipelineGreen pipeline = new VisionPipelineGreen();
+    //VisionPipelineGreen pipeline = new VisionPipelineGreen();
 
     @Override
     public void init() {

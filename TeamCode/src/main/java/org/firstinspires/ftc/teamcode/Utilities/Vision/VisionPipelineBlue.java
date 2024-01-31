@@ -34,8 +34,8 @@ public class VisionPipelineBlue extends OpenCvPipeline {
 
     public static Rect largestRect;
 
-    public static int min_H = 85;
-    public static int min_S = 70;
+    public static int min_H = 80;
+    public static int min_S = 20;
     public static int min_V = 150;
 
     //sets up for erode/dilate to get rid of stray pixels

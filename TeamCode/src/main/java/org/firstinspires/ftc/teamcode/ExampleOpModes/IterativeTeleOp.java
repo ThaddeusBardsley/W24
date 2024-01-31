@@ -102,21 +102,26 @@ public class IterativeTeleOp extends OpMode {
         //This changes the speed
         drivetrain.drive(drive, strafe, turn, speed);
 
-int jamiePos = 0;
-
         if (gamepad1.a){
             casie.setPosition(1);
         } else {
             casie.setPosition(0);
         }
 
-        if (gamepad1.b){
-            jamiePos = 1;
-            jamie.setPosition(jamiePos);
+        if (gamepad1.dpad_left){
+            jamie.setPosition(-1);
         }
-        if (jamiePos == 1 && gamepad1.b){
-            jamiePos = -1;
-            jamie.setPosition(jamiePos);
+
+        if (gamepad1.dpad_down){
+            jamie.setPosition(0.5);
+        }
+
+        if(gamepad1.dpad_up){
+            jamie.setPosition(0.75);
+        }
+
+        if (gamepad1.dpad_right){
+            jamie.setPosition(1);
         }
 
         if (gamepad1.left_bumper){
@@ -139,9 +144,8 @@ int jamiePos = 0;
     @Override
     public void stop() {
 
-        /*
-                    Y O U R   C O D E   H E R E
-                                                   */
+        multTelemetry.addLine("Flatlined");
+        multTelemetry.update();
     }
 
 
