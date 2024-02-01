@@ -44,7 +44,7 @@ public class IterativeTeleOp extends OpMode {
         leftslides = hardwareMap.get(DcMotor.class, "leftslides");
         rightslides = hardwareMap.get(DcMotor.class, "rightslides");
 
-        multTelemetry.addData(" ", "Launching Espire Console 0.032");
+        multTelemetry.addData("Launching Espire Console 0.032", ".");
         multTelemetry.addData("Status", "Initialized");
         multTelemetry.addLine(":-)");
 
@@ -143,6 +143,7 @@ public class IterativeTeleOp extends OpMode {
             leftslides.setPower(1);
             rightslides.setPower(1);
         } else leftslides.setPower(0); rightslides.setPower(0);
+
         multTelemetry.addData("Status", "Loop Active");
         multTelemetry.addData("heading", drivetrain.gyro.getHeading());
         multTelemetry.update();
