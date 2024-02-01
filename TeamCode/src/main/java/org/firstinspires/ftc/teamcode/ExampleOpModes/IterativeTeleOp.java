@@ -155,7 +155,6 @@ public class IterativeTeleOp extends OpMode {
      */
     @Override
     public void stop() {
-
         multTelemetry.addLine("Flatlined");
         multTelemetry.update();
     }
