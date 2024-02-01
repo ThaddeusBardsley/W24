@@ -26,7 +26,8 @@ public class IterativeTeleOp extends OpMode {
     Servo casie;
     Servo jamie;
     Servo servo;
-    DcMotor motor1;
+    DcMotor leftslides;
+    DcMotor rightslides;
 
 
     /*
@@ -40,8 +41,10 @@ public class IterativeTeleOp extends OpMode {
         casie = hardwareMap.get(Servo.class, "casie");
         servo = hardwareMap.get(Servo.class,"servo");
         jamie = hardwareMap.get(Servo.class, "jamie");
+        leftslides = hardwareMap.get(DcMotor.class, "leftslides");
+        rightslides = hardwareMap.get(DcMotor.class, "rightslides");
 
-        multTelemetry.addLine("Launching Espire Console 0.032");
+        multTelemetry.addData(" ", "Launching Espire Console 0.032");
         multTelemetry.addData("Status", "Initialized");
         multTelemetry.addLine(":-)");
 
@@ -88,7 +91,6 @@ public class IterativeTeleOp extends OpMode {
     public void loop() {
         drivetrain.gyro.update();
 
-
         double speed = 1;
         Point driveStrafePoint = new Point(gamepad1.left_stick_x, gamepad1.left_stick_y);
         driveStrafePoint = MathUtils.shift(driveStrafePoint, Math.toDegrees(drivetrain.gyro.getHeading()));
@@ -96,7 +98,7 @@ public class IterativeTeleOp extends OpMode {
         double strafe = driveStrafePoint.x;
         double turn = -gamepad1.right_stick_x;
 
-        if (gamepad1.left_trigger > .5) {
+        if (gamepad1.y) {
             speed = .5;
         }
         //This changes the speed
@@ -132,6 +134,15 @@ public class IterativeTeleOp extends OpMode {
             servo.setPosition(-1);
         }
 
+        if (gamepad1.left_trigger > .5){
+            leftslides.setPower(-1);
+            rightslides.setPower(-1);
+        } else leftslides.setPower(0); rightslides.setPower(0);
+
+        if (gamepad1.right_trigger > .5){
+            leftslides.setPower(1);
+            rightslides.setPower(1);
+        } else leftslides.setPower(0); rightslides.setPower(0);
         multTelemetry.addData("Status", "Loop Active");
         multTelemetry.addData("heading", drivetrain.gyro.getHeading());
         multTelemetry.update();
