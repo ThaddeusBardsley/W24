@@ -26,8 +26,9 @@ public class IterativeTeleOp extends OpMode {
     Servo casie;
     Servo jamie;
     Servo servo;
-    DcMotor leftslides;
     DcMotor rightslides;
+    DcMotor karl;
+    DcMotor leftslides;
 
 
     /*
@@ -41,8 +42,9 @@ public class IterativeTeleOp extends OpMode {
         casie = hardwareMap.get(Servo.class, "casie");
         servo = hardwareMap.get(Servo.class,"servo");
         jamie = hardwareMap.get(Servo.class, "jamie");
-        leftslides = hardwareMap.get(DcMotor.class, "leftslides");
         rightslides = hardwareMap.get(DcMotor.class, "rightslides");
+        karl = hardwareMap.get(DcMotor.class, "karl");
+        leftslides = hardwareMap.get(DcMotor.class, "leftslides");
 
         multTelemetry.addData("Launching Espire Console 0.032", ".");
         multTelemetry.addData("Status", "Initialized");
@@ -137,12 +139,14 @@ public class IterativeTeleOp extends OpMode {
         if (gamepad1.left_trigger > .5){
             leftslides.setPower(-1);
             rightslides.setPower(-1);
-        } else leftslides.setPower(0); rightslides.setPower(0);
+            karl.setPower(-1);
+        } else rightslides.setPower(0); karl.setPower(0); leftslides.setPower(0);
 
         if (gamepad1.right_trigger > .5){
             leftslides.setPower(1);
             rightslides.setPower(1);
-        } else leftslides.setPower(0); rightslides.setPower(0);
+            karl.setPower(1);
+        } else rightslides.setPower(0); karl.setPower(0); leftslides.setPower(0);
 
         multTelemetry.addData("Status", "Loop Active");
         multTelemetry.addData("heading", drivetrain.gyro.getHeading());
