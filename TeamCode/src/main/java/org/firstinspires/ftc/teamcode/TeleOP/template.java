@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.ExampleOpModes;
+package org.firstinspires.ftc.teamcode.TeleOP;
 
 import static org.firstinspires.ftc.teamcode.Utilities.OpModeUtils.multTelemetry;
 import static org.firstinspires.ftc.teamcode.Utilities.OpModeUtils.setOpMode;
@@ -16,11 +16,15 @@ import org.opencv.core.Point;
 
 
 //@Disabled
-@TeleOp(name="Iterative TeleOp", group="Iterative Opmode")
-public abstract class IterativeTeleOp extends OpMode {
+@TeleOp(name= "template", group="Iterative Opmode")
 
+
+
+
+public abstract class template extends OpMode {
 
     // Declare OpMode members.
+   /*
     private final ElapsedTime runtime = new ElapsedTime();
     public Drivetrain drivetrain;
     Servo casie;
@@ -29,14 +33,14 @@ public abstract class IterativeTeleOp extends OpMode {
     DcMotor rightslides;
     DcMotor karl;
     DcMotor leftslides;
-
+*/
     /*
     Code to run ONCE when the driver hits INIT
      */
     @Override
     public void init() {
         setOpMode(this);
-
+/*
         drivetrain = new Drivetrain();
         casie = hardwareMap.get(Servo.class, "casie");
         servo = hardwareMap.get(Servo.class,"servo");
@@ -44,24 +48,28 @@ public abstract class IterativeTeleOp extends OpMode {
         rightslides = hardwareMap.get(DcMotor.class, "rightslides");
         karl = hardwareMap.get(DcMotor.class, "karl");
         leftslides = hardwareMap.get(DcMotor.class, "leftslides");
-
-        multTelemetry.addData("Status", "Espire Console 0.032");
-        multTelemetry.addLine(":-)");
-        multTelemetry.update();
+*/
+    //    multTelemetry.addData("Status", "Espire Console 0.032");
+    //    multTelemetry.addLine(":-)");
+    //    multTelemetry.update();
+        telemetry.addData("INIT", 7777);
+        telemetry.update();
     }
 
     /*
      * Code to run REPEATEDLY after the driver hits INIT, but before they hit PLAY
      */
     @Override
-    public void init_loop() {
-
+    public void init_loop()
+    {
+        telemetry.addData("INIT", "Loop");
+        telemetry.update();
         /*
                     Y O U R   C O D E   H E R E
                                                     */
 
-        multTelemetry.addData("Status", "InitLoop");
-        multTelemetry.update();
+      //  multTelemetry.addData("Status", "InitLoop");
+      //  multTelemetry.update();
     }
 
 
@@ -70,7 +78,7 @@ public abstract class IterativeTeleOp extends OpMode {
      */
     @Override
     public void start() {
-        runtime.reset();
+        //runtime.reset();
 
 
         /*
@@ -87,7 +95,7 @@ public abstract class IterativeTeleOp extends OpMode {
 
     @Override
     public void loop() {
-        drivetrain.gyro.update();
+        /*drivetrain.gyro.update();
 
         double speed = 1;
         Point driveStrafePoint = new Point(gamepad1.left_stick_x, gamepad1.left_stick_y);
@@ -148,9 +156,9 @@ public abstract class IterativeTeleOp extends OpMode {
             rightslides.setPower(1);
             karl.setPower(1);
         } else rightslides.setPower(0); karl.setPower(0); leftslides.setPower(0);
-
+    */
         multTelemetry.addData("Status", "Loop Active");
-        multTelemetry.addData("heading", drivetrain.gyro.getHeading());
+        //multTelemetry.addData("heading", drivetrain.gyro.getHeading());
         multTelemetry.update();
 
     }
