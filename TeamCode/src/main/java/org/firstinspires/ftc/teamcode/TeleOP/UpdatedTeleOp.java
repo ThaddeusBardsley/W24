@@ -7,12 +7,17 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@TeleOp(name="TeleOpTemplate", group="Iterative Opmode")
+@TeleOp(name="UpdatedTeleOp", group="Iterative Opmode")
 
 public class UpdatedTeleOp extends OpMode
 {
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
+
+    private DcMotor leftslides = null;
+    private DcMotor rightslides = null;
+    private DcMotor karl = null;
+
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -20,6 +25,10 @@ public class UpdatedTeleOp extends OpMode
     @Override
     public void init() {
         telemetry.addData("Status", "init");
+
+            leftslides = hardwareMap.get(DcMotor.class, "leftslides");
+             rightslides = hardwareMap.get(DcMotor.class, "rightslides");
+             karl  = hardwareMap.get(DcMotor.class, "karl");
 
     }
 
@@ -29,6 +38,8 @@ public class UpdatedTeleOp extends OpMode
     @Override
     public void init_loop() {
         telemetry.addData("Status", "init_loop");
+        telemetry.addData("Mapped = ", "True");
+
     }
 
     /*
@@ -47,7 +58,17 @@ public class UpdatedTeleOp extends OpMode
     @Override
     public void loop() {
         telemetry.addData("Status", "loop");
+if (gamepad1.left_trigger > .5) {
+    rightslides.setPower(1);
+    leftslides.setPower(1);
+    karl.setPower(1);
+} else rightslides.setPower(0); leftslides.setPower(0); karl.setPower(0);
 
+if (gamepad1.right_trigger > .5) {
+    rightslides.setPower(-1);
+    leftslides.setPower(-1);
+    karl.setPower(-1);
+} else rightslides.setPower(0); leftslides.setPower(0); karl.setPower(0);
     }
 
     /*
@@ -55,7 +76,7 @@ public class UpdatedTeleOp extends OpMode
      */
     @Override
     public void stop() {
-        telemetry.addData("Status", "stop");
+        telemetry.addData("Status", "Flatlined");
     }
 
 }
