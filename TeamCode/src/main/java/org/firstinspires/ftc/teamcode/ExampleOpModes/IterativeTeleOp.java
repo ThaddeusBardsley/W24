@@ -6,7 +6,6 @@ import static org.firstinspires.ftc.teamcode.Utilities.OpModeUtils.setOpMode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -30,7 +29,6 @@ public abstract class IterativeTeleOp extends OpMode {
     DcMotor karl;
     DcMotor leftslides;
 
-
     /*
     Code to run ONCE when the driver hits INIT
      */
@@ -46,9 +44,8 @@ public abstract class IterativeTeleOp extends OpMode {
         karl = hardwareMap.get(DcMotor.class, "karl");
         leftslides = hardwareMap.get(DcMotor.class, "leftslides");
 
-        multTelemetry.addData("Status", "Initialized");
+        multTelemetry.addData("Status", "Espire Console 0.032");
         multTelemetry.addLine(":-)");
-
         multTelemetry.update();
     }
 
@@ -167,6 +164,4 @@ public abstract class IterativeTeleOp extends OpMode {
         multTelemetry.update();
     }
 
-
-    public abstract void runOpMode() throws InterruptedException;
 }
