@@ -18,7 +18,7 @@ import org.opencv.core.Point;
 
 //@Disabled
 @TeleOp(name="Iterative TeleOp", group="Iterative Opmode")
-public class IterativeTeleOp extends OpMode {
+public abstract class IterativeTeleOp extends OpMode {
 
     // Declare OpMode members.
     private final ElapsedTime runtime = new ElapsedTime();
@@ -46,7 +46,6 @@ public class IterativeTeleOp extends OpMode {
         karl = hardwareMap.get(DcMotor.class, "karl");
         leftslides = hardwareMap.get(DcMotor.class, "leftslides");
 
-        multTelemetry.addData("Launching Espire Console 0.032", ".");
         multTelemetry.addData("Status", "Initialized");
         multTelemetry.addLine(":-)");
 
@@ -100,9 +99,14 @@ public class IterativeTeleOp extends OpMode {
         double strafe = driveStrafePoint.x;
         double turn = -gamepad1.right_stick_x;
 
-        if (gamepad1.y) {
+        if (gamepad1.left_trigger > .5) {
             speed = .5;
         }
+
+        if (gamepad1.right_trigger > .5){
+            speed = .25;
+        }
+
         //This changes the speed
         drivetrain.drive(drive, strafe, turn, speed);
 
@@ -136,16 +140,16 @@ public class IterativeTeleOp extends OpMode {
             servo.setPosition(-1);
         }
 
-        if (gamepad1.left_trigger > .5){
-            leftslides.setPower(-0.75);
-            rightslides.setPower(-0.75);
-            karl.setPower(-0.75);
+        if (gamepad2.left_trigger > .5){
+            leftslides.setPower(-1);
+            rightslides.setPower(-1);
+            karl.setPower(-1);
         } else rightslides.setPower(0); karl.setPower(0); leftslides.setPower(0);
 
-        if (gamepad1.right_trigger > .5){
-            leftslides.setPower(0.75);
-            rightslides.setPower(0.75);
-            karl.setPower(0.75);
+        if (gamepad2.right_trigger > .5){
+            leftslides.setPower(1);
+            rightslides.setPower(1);
+            karl.setPower(1);
         } else rightslides.setPower(0); karl.setPower(0); leftslides.setPower(0);
 
         multTelemetry.addData("Status", "Loop Active");
@@ -164,4 +168,5 @@ public class IterativeTeleOp extends OpMode {
     }
 
 
+    public abstract void runOpMode() throws InterruptedException;
 }
