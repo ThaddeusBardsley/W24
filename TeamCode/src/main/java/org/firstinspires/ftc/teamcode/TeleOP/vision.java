@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.TeleOP;
 
 import com.acmerobotics.dashboard.FtcDashboard;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -14,6 +15,8 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
+
+@Disabled
 @TeleOp(name="vision", group="Iterative Opmode")
 public class vision extends OpMode {
 private VisionProcessing visionProcessor = new VisionProcessing();

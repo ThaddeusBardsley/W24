@@ -27,8 +27,6 @@ public class UpdatedTeleOp extends OpMode
     private Servo servo = null;
     private DcMotor leftslides = null;
     private DcMotor rightslides = null;
-    private DcMotor karl = null;
-    DcMotor karl2;
 
     int position1 = 0;
     int position2 = 1000;
@@ -46,13 +44,8 @@ public class UpdatedTeleOp extends OpMode
         drivetrain = new Drivetrain();
 
         leftslides = hardwareMap.get(DcMotor.class, "leftslides");
-        leftslides.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         rightslides = hardwareMap.get(DcMotor.class, "rightslides");
-        rightslides.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-        karl  = hardwareMap.get(DcMotor.class, "karl");
-        karl.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         casie = hardwareMap.get(Servo.class, "casie");
         servo = hardwareMap.get(Servo.class,"servo");
@@ -128,23 +121,24 @@ public class UpdatedTeleOp extends OpMode
             jamie.setPosition(1);
         }
 
+//        if (gamepad2.left_bumper){
+//            servo.setPosition(1);
+//        }
+//
+//        if (gamepad2.right_bumper){
+//            servo.setPosition(-1);
+//        }
+
         if (gamepad2.left_bumper){
-            servo.setPosition(1);
+            rightslides.setPower(.5);
+            leftslides.setPower(-.5);
+        } else if (gamepad2.right_bumper){
+            rightslides.setPower(-.5);
+            leftslides.setPower(.5);
+        } else {
+            rightslides.setPower(0);
+            leftslides.setPower(0);
         }
-
-        if (gamepad2.right_bumper){
-            servo.setPosition(-1);
-        }
-
-        if (gamepad2.left_trigger > .5){
-            leftslides.setPower(-1);
-            rightslides.setPower(-1);
-            //karl.setPower(-1);
-        } else if (gamepad2.right_trigger > .5){
-            leftslides.setPower(1);
-            rightslides.setPower(1);
-            //karl.setPower(1);
-        } else rightslides.setPower(0); /*karl.setPower(0);*/  leftslides.setPower(0);
 
 
        telemetry.addData("Status", "Loop Active");

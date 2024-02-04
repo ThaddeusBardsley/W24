@@ -31,5 +31,34 @@ public class EHubTest extends OpMode {
             motor1.setPower(0);
         }
 
+        if(gamepad1.right_bumper){
+            motor2.setPower(-.5);
+        }else{
+            motor2.setPower(0);
+        }
+
+        if(gamepad1.circle){
+            motor3.setPower(.5);
+        }else{
+            motor3.setPower(0);
+        }
+
+
+        //Results:
+        /*
+
+        TODO 1 Motor -> Port 0
+        w/o slides - fine       w/ slides - failed at 3.29
+        TODO 1 Motor -> Port 1
+        w/o slides - fine       w/ slides - failed at 4.5
+        TODO 1 Motor -> Port 2
+        w/o slides - fine       w/ slides - failed at 4
+
+
+
+         */
+
+
+
     }
 }

@@ -35,6 +35,8 @@ public class Drivetrain {
         br.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         bl.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
+
+
     public void drive (double YPower, double XPower, double HeadingPower, double Speed){
 
         //
@@ -46,6 +48,8 @@ public class Drivetrain {
         //backwards
         br.setPower((YPower - XPower - HeadingPower) * Speed);
         }
+
+
         public void autoDrive(double distance, double drive, double strafe, double speed, double headingPower){
         resetMotors();
         double distanceDriven = 0;

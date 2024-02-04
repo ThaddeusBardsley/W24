@@ -1,14 +1,12 @@
 package org.firstinspires.ftc.teamcode.TeleOP;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+
+@Disabled
 @TeleOp(name = "debug (Blocks to Java)")
-
-
-
-
-
 public class debug extends LinearOpMode {
 
 
