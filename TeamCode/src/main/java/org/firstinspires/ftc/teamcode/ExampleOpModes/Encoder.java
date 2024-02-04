@@ -9,10 +9,10 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 public class Encoder extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
-        //ticks per revolution : 384.5
+        //ticks per revolution : 1000
         DcMotorEx rightslides = hardwareMap.get(DcMotorEx.class, "rightslides");
         rightslides.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        int degrees = 100;
+        int degrees = 3000;
 
         waitForStart();
 
