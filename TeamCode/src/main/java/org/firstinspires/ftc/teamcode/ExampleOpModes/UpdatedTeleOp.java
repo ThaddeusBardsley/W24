@@ -39,9 +39,15 @@ public class UpdatedTeleOp extends OpMode
         setOpMode(this);
         telemetry.addData("Status", "init");
         drivetrain = new Drivetrain();
+
         leftslides = hardwareMap.get(DcMotor.class, "leftslides");
+        leftslides.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
         rightslides = hardwareMap.get(DcMotor.class, "rightslides");
+        rightslides.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
         karl  = hardwareMap.get(DcMotor.class, "karl");
+        karl.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         casie = hardwareMap.get(Servo.class, "casie");
         servo = hardwareMap.get(Servo.class,"servo");
@@ -84,11 +90,11 @@ public class UpdatedTeleOp extends OpMode
         double strafe = driveStrafePoint.x;
         double turn = -gamepad1.right_stick_x;
 
-        if (gamepad1.x){
+        if (gamepad1.left_trigger > .5){
             speed = .5;
         }
 
-        if (gamepad1.b){
+        if (gamepad1.right_trigger > .5){
             speed = .25;
         }
 
@@ -125,17 +131,18 @@ public class UpdatedTeleOp extends OpMode
             servo.setPosition(-1);
         }
 
-        if (gamepad1.left_trigger > .5){
+        if (gamepad2.left_trigger > .5){
             leftslides.setPower(-1);
             rightslides.setPower(-1);
             karl.setPower(-1);
         } else rightslides.setPower(0); karl.setPower(0); leftslides.setPower(0);
 
-        if (gamepad1.right_trigger > .5){
+        if (gamepad2.right_trigger > .5){
             leftslides.setPower(1);
             rightslides.setPower(1);
             karl.setPower(1);
         } else rightslides.setPower(0); karl.setPower(0); leftslides.setPower(0);
+
 
         telemetry.addData("Status", "Loop Active");
         telemetry.addData("heading", drivetrain.gyro.getHeading());
