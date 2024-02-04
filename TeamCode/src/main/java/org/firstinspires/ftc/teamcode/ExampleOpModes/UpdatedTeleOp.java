@@ -28,7 +28,12 @@ public class UpdatedTeleOp extends OpMode
     private DcMotor leftslides = null;
     private DcMotor rightslides = null;
     private DcMotor karl = null;
-    //DcMotor karl2;
+    DcMotor karl2;
+
+    int position1 = 0;
+    int position2 = 1000;
+    int position3 = 2000;
+    int position4 = 3000;
 
 
     /*
@@ -41,13 +46,13 @@ public class UpdatedTeleOp extends OpMode
         drivetrain = new Drivetrain();
 
         leftslides = hardwareMap.get(DcMotor.class, "leftslides");
-        leftslides.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftslides.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         rightslides = hardwareMap.get(DcMotor.class, "rightslides");
-        rightslides.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightslides.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         karl  = hardwareMap.get(DcMotor.class, "karl");
-        karl.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        karl.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         casie = hardwareMap.get(Servo.class, "casie");
         servo = hardwareMap.get(Servo.class,"servo");
@@ -101,52 +106,50 @@ public class UpdatedTeleOp extends OpMode
         //This changes the speed
         drivetrain.drive(drive, strafe, turn, speed);
 
-        if (gamepad1.a){
+        if (gamepad2.a){
             casie.setPosition(1);
         } else {
             casie.setPosition(0);
         }
 
-        if (gamepad1.dpad_left){
+        if (gamepad2.dpad_left){
             jamie.setPosition(-1);
         }
 
-        if (gamepad1.dpad_down){
+        if (gamepad2.dpad_down){
             jamie.setPosition(0.5);
         }
 
-        if(gamepad1.dpad_up){
+        if(gamepad2.dpad_up){
             jamie.setPosition(0.75);
         }
 
-        if (gamepad1.dpad_right){
+        if (gamepad2.dpad_right){
             jamie.setPosition(1);
         }
 
-        if (gamepad1.left_bumper){
+        if (gamepad2.left_bumper){
             servo.setPosition(1);
         }
 
-        if (gamepad1.right_bumper){
+        if (gamepad2.right_bumper){
             servo.setPosition(-1);
         }
 
         if (gamepad2.left_trigger > .5){
             leftslides.setPower(-1);
             rightslides.setPower(-1);
-            karl.setPower(-1);
-        } else rightslides.setPower(0); karl.setPower(0); leftslides.setPower(0);
-
-        if (gamepad2.right_trigger > .5){
+            //karl.setPower(-1);
+        } else if (gamepad2.right_trigger > .5){
             leftslides.setPower(1);
             rightslides.setPower(1);
-            karl.setPower(1);
-        } else rightslides.setPower(0); karl.setPower(0); leftslides.setPower(0);
+            //karl.setPower(1);
+        } else rightslides.setPower(0); /*karl.setPower(0);*/  leftslides.setPower(0);
 
 
-        telemetry.addData("Status", "Loop Active");
-        telemetry.addData("heading", drivetrain.gyro.getHeading());
-    }
+       telemetry.addData("Status", "Loop Active");
+       telemetry.addData("heading", drivetrain.gyro.getHeading());
+            }
 
     /*
      * Code to run ONCE after the driver hits STOP
