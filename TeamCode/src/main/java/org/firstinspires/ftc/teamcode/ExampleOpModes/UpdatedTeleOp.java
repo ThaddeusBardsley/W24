@@ -27,8 +27,8 @@ public class UpdatedTeleOp extends OpMode
     private Servo servo = null;
     private DcMotor leftslides = null;
     private DcMotor rightslides = null;
-    private DcMotor karl = null;
-    DcMotor karl2;
+    //private DcMotor karl = null;
+    //DcMotor karl2;
 
     int position1 = 0;
     int position2 = 1000;
@@ -51,8 +51,8 @@ public class UpdatedTeleOp extends OpMode
         rightslides = hardwareMap.get(DcMotor.class, "rightslides");
         rightslides.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        karl  = hardwareMap.get(DcMotor.class, "karl");
-        karl.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        //karl  = hardwareMap.get(DcMotor.class, "karl");
+        //karl.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         casie = hardwareMap.get(Servo.class, "casie");
         servo = hardwareMap.get(Servo.class,"servo");
