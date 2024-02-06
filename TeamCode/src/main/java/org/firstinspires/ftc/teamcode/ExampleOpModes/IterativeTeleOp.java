@@ -5,6 +5,7 @@ import static org.firstinspires.ftc.teamcode.Utilities.OpModeUtils.multTelemetry
 import static org.firstinspires.ftc.teamcode.Utilities.OpModeUtils.setOpMode;
 
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -16,7 +17,7 @@ import org.firstinspires.ftc.teamcode.Utilities.MathUtils;
 import org.opencv.core.Point;
 
 
-//@Disabled
+@Disabled
 @TeleOp(name="Iterative TeleOp", group="Iterative Opmode")
 public abstract class IterativeTeleOp extends OpMode {
 

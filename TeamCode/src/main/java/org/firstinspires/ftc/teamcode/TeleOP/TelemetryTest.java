@@ -3,9 +3,12 @@ package org.firstinspires.ftc.teamcode.TeleOP;
 import static org.firstinspires.ftc.teamcode.Utilities.OpModeUtils.multTelemetry;
 import static org.firstinspires.ftc.teamcode.Utilities.OpModeUtils.setOpMode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+
+@Disabled
 @TeleOp(name= "TelemetryTest", group= "IterativeOpmode")
 public abstract class TelemetryTest extends OpMode {
 
