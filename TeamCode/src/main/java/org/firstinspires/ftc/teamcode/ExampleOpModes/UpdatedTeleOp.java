@@ -95,61 +95,65 @@ public class UpdatedTeleOp extends OpMode
         double strafe = driveStrafePoint.x;
         double turn = -gamepad1.right_stick_x;
 
-        if (gamepad1.left_trigger > .5){
+        if (gamepad1.left_trigger > .5) {
             speed = .5;
         }
 
-        if (gamepad1.right_trigger > .5){
+        if (gamepad1.right_trigger > .5) {
             speed = .25;
         }
 
         //This changes the speed
         drivetrain.drive(drive, strafe, turn, speed);
 
-        if (gamepad2.a){
+        if (gamepad2.a) {
             casie.setPosition(1);
         } else {
             casie.setPosition(0);
         }
 
-        if (gamepad2.dpad_left){
+        if (gamepad2.dpad_left) {
             jamie.setPosition(-1);
         }
 
-        if (gamepad2.dpad_down){
+        if (gamepad2.dpad_down) {
             jamie.setPosition(0.5);
         }
 
-        if(gamepad2.dpad_up){
+        if (gamepad2.dpad_up) {
             jamie.setPosition(0.75);
         }
 
-        if (gamepad2.dpad_right){
+        if (gamepad2.dpad_right) {
             jamie.setPosition(1);
         }
 
-        if (gamepad2.left_bumper){
+        if (gamepad2.left_bumper) {
             servo.setPosition(1);
         }
 
-        if (gamepad2.right_bumper){
+        if (gamepad2.right_bumper) {
             servo.setPosition(-1);
         }
 
-        if (gamepad2.left_trigger > .5){
+        if (gamepad2.left_trigger > .5) {
             leftslides.setPower(-1);
             rightslides.setPower(-1);
             //karl.setPower(-1);
-        } else if (gamepad2.right_trigger > .5){
+        } else if (gamepad2.right_trigger > .5) {
             leftslides.setPower(1);
             rightslides.setPower(1);
             //karl.setPower(1);
-        } else rightslides.setPower(0); /*karl.setPower(0);*/  leftslides.setPower(0);
+        } else{
+            rightslides.setPower(0);
+            leftslides.setPower(0);
+        }
+
 
 
        telemetry.addData("Status", "Loop Active");
        telemetry.addData("heading", drivetrain.gyro.getHeading());
-            }
+    }
 
     /*
      * Code to run ONCE after the driver hits STOP

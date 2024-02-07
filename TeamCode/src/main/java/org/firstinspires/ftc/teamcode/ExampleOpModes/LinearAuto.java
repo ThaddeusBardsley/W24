@@ -32,9 +32,16 @@ public class LinearAuto extends LinearOpMode {
 
         rightslides = hardwareMap.get(DcMotor.class, "rightslides");
         rightslides.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightslides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightslides.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightslides.setPower(0.5);
+
 
         leftslides = hardwareMap.get(DcMotor.class, "leftslides");
         leftslides.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftslides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftslides.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftslides.setPower(0.5);
 
 
         telemetry.addData("Status", "Initialized");
@@ -53,19 +60,14 @@ public class LinearAuto extends LinearOpMode {
 
             //TODO CODE THAT RUNS AFTER START
             //For example:
+            setSlides(degrees);
             drivetrain.autoDrive(50,1, 0,1, 0);
-
-                telemetry.addData("Auto Status", "Online");
-                telemetry.update();
-
-            rightslides.setTargetPosition(degrees);
-            rightslides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            rightslides.setPower(1);
-
-            rightslides.setTargetPosition(degrees);
-            rightslides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            rightslides.setPower(1);
             }
+        }
+
+        public void setSlides(int pos){
+            rightslides.setTargetPosition(pos);
+            leftslides.setTargetPosition(pos);
         }
 
 }
