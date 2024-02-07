@@ -2,6 +2,16 @@
 package org.firstinspires.ftc.teamcode.ExampleOpModes;
 
 
+import static org.firstinspires.ftc.teamcode.Utilities.Controls.ButtonControls.ButtonState.DOWN;
+import static org.firstinspires.ftc.teamcode.Utilities.Controls.ButtonControls.ButtonState.TAP;
+import static org.firstinspires.ftc.teamcode.Utilities.Controls.ButtonControls.Input.A;
+import static org.firstinspires.ftc.teamcode.Utilities.Controls.ButtonControls.Input.LB2;
+import static org.firstinspires.ftc.teamcode.Utilities.Controls.ButtonControls.Input.RB2;
+import static org.firstinspires.ftc.teamcode.Utilities.Controls.JoystickControls.Input.LEFT;
+import static org.firstinspires.ftc.teamcode.Utilities.Controls.JoystickControls.Input.RIGHT;
+import static org.firstinspires.ftc.teamcode.Utilities.Controls.JoystickControls.Value.INVERT_X;
+import static org.firstinspires.ftc.teamcode.Utilities.Controls.JoystickControls.Value.X;
+import static org.firstinspires.ftc.teamcode.Utilities.Controls.JoystickControls.Value.Y;
 import static org.firstinspires.ftc.teamcode.Utilities.OpModeUtils.setOpMode;
 
 import com.qualcomm.robotcore.hardware.Servo;
@@ -12,6 +22,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 
 import org.firstinspires.ftc.teamcode.TeleOP.Drivetrain;
+import org.firstinspires.ftc.teamcode.Utilities.Controls.Controller;
 import org.firstinspires.ftc.teamcode.Utilities.MathUtils;
 import org.opencv.core.Point;
 
@@ -35,6 +46,8 @@ public class UpdatedTeleOp extends OpMode
     int position3 = 2000;
     int position4 = 3000;
 
+    Controller driver1;
+    Controller driver2;
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -59,6 +72,9 @@ public class UpdatedTeleOp extends OpMode
         casie = hardwareMap.get(Servo.class, "casie");
         servo = hardwareMap.get(Servo.class,"servo");
         jamie = hardwareMap.get(Servo.class, "jamie");
+
+        driver1 = new Controller(gamepad1);
+        driver2 = new Controller(gamepad2);
     }
 
     /*
@@ -86,29 +102,32 @@ public class UpdatedTeleOp extends OpMode
      */
     @Override
     public void loop() {
+        Controller.update();
+
+
         telemetry.addData("Status", "loop");
 
         drivetrain.gyro.update();
 
         double speed = 1;
-        Point driveStrafePoint = new Point(gamepad1.left_stick_x, gamepad1.left_stick_y);
+        Point driveStrafePoint = new Point(driver1.get(LEFT,X), driver1.get(LEFT, Y));
         driveStrafePoint = MathUtils.shift(driveStrafePoint, Math.toDegrees(drivetrain.gyro.getHeading()));
         double drive = driveStrafePoint.y;
         double strafe = driveStrafePoint.x;
-        double turn = -gamepad1.right_stick_x;
+        double turn = driver1.get(RIGHT, INVERT_X);
 
-        if (gamepad1.left_trigger > .5) {
+        if (driver1.get(LB2, DOWN)) {
             speed = .5;
         }
 
-        if (gamepad1.right_trigger > .5) {
+        if (driver1.get(RB2, DOWN)) {
             speed = .25;
         }
 
         //This changes the speed
         drivetrain.drive(drive, strafe, turn, speed);
 
-        if (gamepad2.a) {
+        if (driver2.get(A, TAP)) {
             casie.setPosition(1);
         } else {
             casie.setPosition(0);
@@ -138,11 +157,11 @@ public class UpdatedTeleOp extends OpMode
             servo.setPosition(-1);
         }
 
-        if (gamepad2.left_trigger > .5 && leftslides.getCurrentPosition() > 0) {
+        if (gamepad2.left_trigger > .5 && leftslides.getCurrentPosition() < 0) {
             leftslides.setPower(-1);
             rightslides.setPower(-1);
             //karl.setPower(-1);
-        } else if (gamepad2.right_trigger > .5 && leftslides.getCurrentPosition() < 3000) {
+        } else if (gamepad2.right_trigger > .5 && leftslides.getCurrentPosition() > -2800) {
             leftslides.setPower(1);
             rightslides.setPower(1);
             //karl.setPower(1);

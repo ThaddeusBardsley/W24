@@ -31,7 +31,7 @@ VisionPipelineBlue pipeline = new VisionPipelineBlue();
 
     @Override
     public void init() {
-telemetry.update();
+    telemetry.update();
 
 //for visionProccesor
 //webcam1 = hardwareMap.get(WebcamName.class, "Webcam 1");

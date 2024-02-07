@@ -1,22 +1,39 @@
 package org.firstinspires.ftc.teamcode.ExampleOpModes;
 
+import static org.firstinspires.ftc.teamcode.Utilities.OpModeUtils.multTelemetry;
 import static org.firstinspires.ftc.teamcode.Utilities.OpModeUtils.setOpMode;
 
+import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.TeleOP.Drivetrain;
+import org.firstinspires.ftc.teamcode.Utilities.Vision.VisionPipelineBlue;
+import org.firstinspires.ftc.teamcode.Utilities.Vision.VisionProcessing;
+import org.firstinspires.ftc.vision.VisionPortal;
+import org.openftc.easyopencv.OpenCvCamera;
+import org.openftc.easyopencv.OpenCvCameraFactory;
+import org.openftc.easyopencv.OpenCvCameraRotation;
 
 
 @Autonomous(name="Basic: Linear OpMode", group="Linear OpMode")
 public class LinearAuto extends LinearOpMode {
 
     Drivetrain drivetrain;
-    DcMotor rightslides;
-    DcMotor leftslides;
+    DcMotor rightSlides;
+    DcMotor leftSlides;
+
+    private VisionProcessing visionProcessor = new VisionProcessing();
+    private VisionPortal visionPortal;
+    private WebcamName webcam1;
+
+    //To change between colors, comment one and comment the other.
+    private OpenCvCamera camera;
+    VisionPipelineBlue pipeline = new VisionPipelineBlue();
+
 
     int degrees = 3000;
 
@@ -30,18 +47,46 @@ public class LinearAuto extends LinearOpMode {
 
         drivetrain = new Drivetrain();
 
-        rightslides = hardwareMap.get(DcMotor.class, "rightslides");
-        rightslides.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightslides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightslides.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightslides.setPower(0.5);
+        rightSlides = hardwareMap.get(DcMotor.class, "rightslides");
+        rightSlides.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        rightslides.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightSlides.setTargetPosition(0);
+        rightSlides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightSlides.setPower(0.5);
 
 
-        leftslides = hardwareMap.get(DcMotor.class, "leftslides");
-        leftslides.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        leftslides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftslides.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        leftslides.setPower(0.5);
+        leftSlides = hardwareMap.get(DcMotor.class, "leftslides");
+        leftSlides.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        leftslides.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftSlides.setTargetPosition(0);
+        leftSlides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftSlides.setPower(0.5);
+
+
+
+
+        int cameraMoniterViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMoniterViewId", "id", hardwareMap.appContext.getPackageName());
+        camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMoniterViewId);
+        camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
+
+
+            @Override
+            public void onOpened() {
+                camera.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
+
+//this just sets up the camera
+                //  camera.resumeViewport();
+
+            }
+            @Override
+            public void onError(int errorCode) {
+//When camera doesn't work nothing happens
+            }
+        });
+
+
+        camera.setPipeline(pipeline);
+        FtcDashboard.getInstance().startCameraStream(camera, 30);
 
 
         telemetry.addData("Status", "Initialized");
@@ -57,17 +102,34 @@ public class LinearAuto extends LinearOpMode {
 
         if (opModeIsActive()) {
 
+            //TODO CODE
 
-            //TODO CODE THAT RUNS AFTER START
-            //For example:
-            setSlides(degrees);
-            drivetrain.autoDrive(50,1, 0,1, 0);
-            }
+
+            setSlides(200);
+            wait(2);
+            multTelemetry.addData("position", visionProcessor.getTeampropPosition());
+            multTelemetry.update();
+            drivetrain.autoDrive(600,1, 0,1, 0);
+
+
+
+
+
+
+        }
         }
 
         public void setSlides(int pos){
-            rightslides.setTargetPosition(pos);
-            leftslides.setTargetPosition(pos);
+            leftSlides.setTargetPosition(pos);
+            rightSlides.setTargetPosition(pos);
+
+        }
+
+        public void wait(int seconds){
+            ElapsedTime time = new ElapsedTime();
+            while(time.seconds() < seconds){
+
+            }
         }
 
 }
