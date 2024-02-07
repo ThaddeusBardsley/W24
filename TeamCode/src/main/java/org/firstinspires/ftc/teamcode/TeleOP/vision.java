@@ -16,7 +16,6 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
 
-@Disabled
 @TeleOp(name="vision", group="Iterative Opmode")
 public class vision extends OpMode {
 private VisionProcessing visionProcessor = new VisionProcessing();
@@ -25,8 +24,8 @@ private WebcamName webcam1;
 
 //To change between colors, comment one and comment the other.
 private OpenCvCamera camera;
-VisionPipelineBlue pipeline = new VisionPipelineBlue();
-//VisionPipelineRed pipeline = new VisionPipelineRed();
+//VisionPipelineBlue pipeline = new VisionPipelineBlue();
+VisionPipelineRed pipeline = new VisionPipelineRed();
     //VisionPipelineGreen pipeline = new VisionPipelineGreen();
 
     @Override

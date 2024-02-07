@@ -50,7 +50,7 @@ public class Drivetrain {
         }
 
 
-        public void autoDrive(double distance, double drive, double strafe, double speed, double headingPower){
+        public void autoDrive(double distance, double YPower, double XPower, double Speed, double HeadingPower){
         resetMotors();
         double distanceDriven = 0;
 
@@ -59,16 +59,51 @@ public class Drivetrain {
             distanceDriven = (Math.abs(fl.getCurrentPosition()) + Math.abs(fr.getCurrentPosition()) + Math.abs(br.getCurrentPosition()) + Math.abs(bl.getCurrentPosition())) / 4.0;
 
 
-//            fl.setPower((distance - drive + strafe) * speed);
-//            fr.setPower(-(distance + drive - strafe) * speed);
-//            bl.setPower((distance + drive + strafe) * speed);
-//            br.setPower(-(distance - drive - strafe) * speed);
-            fl.setPower(0.2);
-            fr.setPower(-0.2);
-            bl.setPower(0.2);
-            br.setPower(-0.2);
+            fl.setPower((YPower - XPower + HeadingPower) * Speed);
+            //
+            fr.setPower(-(YPower + XPower - HeadingPower) * Speed);
+            //
+            bl.setPower((YPower + XPower + HeadingPower) * Speed);
+            //backwards
+            br.setPower(-(YPower - XPower - HeadingPower) * Speed);
+//            fl.setPower(0.2);
+//            fr.setPower(-0.2);
+//            bl.setPower(0.2);
+//            br.setPower(-0.2);
 
             multTelemetry.addData("Distance", distanceDriven);
         }
+
     }
-}
+    public void turn(double degrees, double speed){
+        resetMotors();
+        gyro.update();
+        if(degrees > gyro.getHeading()){
+            while(Math.toDegrees(gyro.getHeading()) < degrees){
+                gyro.update();
+                fl.setPower(-speed);
+                bl.setPower(-speed);
+                fr.setPower(-speed);
+                br.setPower(-speed);
+                multTelemetry.addData("heading", gyro.getHeading());
+                multTelemetry.update();
+
+            }
+        }else{
+            while(Math.toDegrees(gyro.getHeading()) > degrees){
+                gyro.update();
+                fl.setPower(speed);
+                bl.setPower(speed);
+                fr.setPower(speed);
+                br.setPower(speed);
+                multTelemetry.addData("heading", gyro.getHeading());
+                multTelemetry.update();
+            }
+        }
+    }
+
+    }
+
+
+
+

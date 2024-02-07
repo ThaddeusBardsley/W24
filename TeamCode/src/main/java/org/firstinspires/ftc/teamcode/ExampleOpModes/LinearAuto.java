@@ -12,6 +12,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.TeleOP.Drivetrain;
 import org.firstinspires.ftc.teamcode.Utilities.Vision.VisionPipelineBlue;
+import org.firstinspires.ftc.teamcode.Utilities.Vision.VisionPipelineRed;
 import org.firstinspires.ftc.teamcode.Utilities.Vision.VisionProcessing;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.openftc.easyopencv.OpenCvCamera;
@@ -33,6 +34,7 @@ public class LinearAuto extends LinearOpMode {
     //To change between colors, comment one and comment the other.
     private OpenCvCamera camera;
     VisionPipelineBlue pipeline = new VisionPipelineBlue();
+    //VisionPipelineBlue pipeline = new VisionPipelineRed();
 
 
     int degrees = 3000;
@@ -49,18 +51,18 @@ public class LinearAuto extends LinearOpMode {
 
         rightSlides = hardwareMap.get(DcMotor.class, "rightslides");
         rightSlides.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        rightslides.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightSlides.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightSlides.setTargetPosition(0);
         rightSlides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightSlides.setPower(0.5);
+        rightSlides.setPower(1);
 
 
         leftSlides = hardwareMap.get(DcMotor.class, "leftslides");
         leftSlides.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        leftslides.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftSlides.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         leftSlides.setTargetPosition(0);
         leftSlides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftSlides.setPower(0.5);
+        leftSlides.setPower(1);
 
 
 
@@ -106,15 +108,13 @@ public class LinearAuto extends LinearOpMode {
 
 
             setSlides(200);
-            wait(2);
             multTelemetry.addData("position", visionProcessor.getTeampropPosition());
             multTelemetry.update();
-            drivetrain.autoDrive(600,1, 0,1, 0);
-
-
-
-
-
+            drivetrain.autoDrive(1000,1, 0,0.25, 0);
+            drivetrain.turn(-270,0.5);
+            drivetrain.autoDrive(1000,1,0,0.25,0);
+            drivetrain.turn(-75,0.5);
+            drivetrain.autoDrive(100,-1,0,0.25,0);
 
         }
         }
