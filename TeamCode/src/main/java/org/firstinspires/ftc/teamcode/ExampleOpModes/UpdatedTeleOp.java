@@ -46,9 +46,11 @@ public class UpdatedTeleOp extends OpMode
         drivetrain = new Drivetrain();
 
         leftslides = hardwareMap.get(DcMotor.class, "leftslides");
+        leftslides.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftslides.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         rightslides = hardwareMap.get(DcMotor.class, "rightslides");
+        rightslides.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightslides.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         //karl  = hardwareMap.get(DcMotor.class, "karl");
@@ -136,11 +138,11 @@ public class UpdatedTeleOp extends OpMode
             servo.setPosition(-1);
         }
 
-        if (gamepad2.left_trigger > .5) {
+        if (gamepad2.left_trigger > .5 && leftslides.getCurrentPosition() > 0) {
             leftslides.setPower(-1);
             rightslides.setPower(-1);
             //karl.setPower(-1);
-        } else if (gamepad2.right_trigger > .5) {
+        } else if (gamepad2.right_trigger > .5 && leftslides.getCurrentPosition() < 3000) {
             leftslides.setPower(1);
             rightslides.setPower(1);
             //karl.setPower(1);
@@ -151,7 +153,7 @@ public class UpdatedTeleOp extends OpMode
 
 
 
-       telemetry.addData("Status", "Loop Active");
+       telemetry.addData("slidepos", leftslides.getCurrentPosition());
        telemetry.addData("heading", drivetrain.gyro.getHeading());
     }
 
