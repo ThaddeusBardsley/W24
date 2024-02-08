@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.Utilities.Vision;
 import static org.opencv.core.Core.inRange;
 import static org.opencv.core.CvType.CV_8U;
 import static org.opencv.imgproc.Imgproc.CHAIN_APPROX_SIMPLE;
+import static org.opencv.imgproc.Imgproc.COLOR_BGR2HSV;
 import static org.opencv.imgproc.Imgproc.COLOR_RGB2HSV;
 import static org.opencv.imgproc.Imgproc.FONT_HERSHEY_COMPLEX;
 import static org.opencv.imgproc.Imgproc.RETR_TREE;
@@ -89,7 +90,7 @@ public class VisionProcessing implements VisionProcessor {
 
 
             // Imgproc.cvtColor(input, modified, COLOR_RGB2HSV);
-            Imgproc.cvtColor(input, modified, COLOR_RGB2HSV);
+            Imgproc.cvtColor(input, modified, COLOR_BGR2HSV);
 
             //goes from RGB to HSV color space
 

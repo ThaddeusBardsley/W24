@@ -29,13 +29,13 @@ import java.util.List;
 
 @Config
 public class VisionPipelineRed extends OpenCvPipeline {
-    public static int max_H = 140;
+    public static int max_H = 255;
     public static int max_S = 70;
     public static int max_V = 255;
 
     public static Rect largestRect;
 
-    public static int min_H = 110;
+    public static int min_H = 155;
     public static int min_S = 35;
     public static int min_V = 120;
 

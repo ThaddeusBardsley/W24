@@ -110,9 +110,9 @@ public class LinearAuto extends LinearOpMode {
             setSlides(200);
             multTelemetry.addData("position", visionProcessor.getTeampropPosition());
             multTelemetry.update();
-            drivetrain.autoDrive(1000,1, 0,0.25, 0);
-            drivetrain.turn(-270,0.5);
-            drivetrain.autoDrive(1000,1,0,0.25,0);
+            drivetrain.autoDrive(1000,1, 0,0.5, 0);
+            drivetrain.turn(90,0.5);
+            drivetrain.autoDrive(900,1,0,0.5,0);
             drivetrain.turn(-75,0.5);
             drivetrain.autoDrive(100,-1,0,0.25,0);
 
