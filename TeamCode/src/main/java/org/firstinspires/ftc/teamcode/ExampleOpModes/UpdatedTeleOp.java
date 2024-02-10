@@ -157,11 +157,11 @@ public class UpdatedTeleOp extends OpMode
             servo.setPosition(-1);
         }
 
-        if (gamepad2.left_trigger > .5 && leftslides.getCurrentPosition() < 0) {
+        if (gamepad2.left_trigger > .5 /*&& leftslides.getCurrentPosition() < 0  */) {
             leftslides.setPower(-1);
             rightslides.setPower(-1);
             //karl.setPower(-1);
-        } else if (gamepad2.right_trigger > .5 && leftslides.getCurrentPosition() > -2800) {
+        } else if (gamepad2.right_trigger > .5 /*&& leftslides.getCurrentPosition() > -2800  */) {
             leftslides.setPower(1);
             rightslides.setPower(1);
             //karl.setPower(1);
@@ -169,8 +169,6 @@ public class UpdatedTeleOp extends OpMode
             rightslides.setPower(0);
             leftslides.setPower(0);
         }
-
-
 
        telemetry.addData("slidepos", leftslides.getCurrentPosition());
        telemetry.addData("heading", drivetrain.gyro.getHeading());

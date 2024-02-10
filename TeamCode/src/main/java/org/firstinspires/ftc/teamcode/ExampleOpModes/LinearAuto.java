@@ -64,6 +64,9 @@ public class LinearAuto extends LinearOpMode {
         leftSlides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         leftSlides.setPower(1);
 
+        telemetry.addData("heading", drivetrain.gyro.getHeading());
+        telemetry.update();
+
 
 
 
@@ -90,7 +93,7 @@ public class LinearAuto extends LinearOpMode {
         camera.setPipeline(pipeline);
         FtcDashboard.getInstance().startCameraStream(camera, 30);
 
-
+        telemetry.addData("heading", drivetrain.gyro.getHeading());
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
@@ -106,15 +109,17 @@ public class LinearAuto extends LinearOpMode {
 
             //TODO CODE
 
-
             setSlides(200);
             multTelemetry.addData("position", visionProcessor.getTeampropPosition());
             multTelemetry.update();
-            drivetrain.autoDrive(1000,1, 0,0.5, 0);
+            drivetrain.autoDrive(1000,1, 0,0.25, 0);
             drivetrain.turn(90,0.5);
-            drivetrain.autoDrive(900,1,0,0.5,0);
+            drivetrain.autoDrive(900,1,0,0.25,0);
             drivetrain.turn(-75,0.5);
-            drivetrain.autoDrive(100,-1,0,0.25,0);
+            drivetrain.autoDrive(275,-1,0,0.25,0);
+
+            telemetry.addData("heading", drivetrain.gyro.getHeading());
+            telemetry.update();
 
         }
         }
