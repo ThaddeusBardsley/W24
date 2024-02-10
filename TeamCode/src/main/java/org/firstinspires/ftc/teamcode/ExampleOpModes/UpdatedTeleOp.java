@@ -146,7 +146,7 @@ public class UpdatedTeleOp extends OpMode
         }
 
         if (gamepad2.dpad_right) {
-            jamie.setPosition(1);
+            jamie.setPosition(0.5);
         }
 
         if (gamepad2.left_bumper) {
