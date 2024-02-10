@@ -127,11 +127,15 @@ public class UpdatedTeleOp extends OpMode
         //This changes the speed
         drivetrain.drive(drive, strafe, turn, speed);
 
-        if (driver2.get(A, TAP)) {
-            casie.setPosition(1);
-        } else {
+        if (gamepad2.a) {
+            casie.setPosition(0.75);
+        } else{
             casie.setPosition(0);
         }
+
+
+
+
 
         if (gamepad2.dpad_left) {
             jamie.setPosition(-1);
@@ -146,7 +150,7 @@ public class UpdatedTeleOp extends OpMode
         }
 
         if (gamepad2.dpad_right) {
-            jamie.setPosition(0.5);
+            jamie.setPosition(1);
         }
 
         if (gamepad2.left_bumper) {
@@ -154,7 +158,7 @@ public class UpdatedTeleOp extends OpMode
         }
 
         if (gamepad2.right_bumper) {
-            servo.setPosition(1);
+            servo.setPosition(0.80);
         }
 
         if (gamepad2.left_trigger > .5 /*&& leftslides.getCurrentPosition() < 0  */) {
