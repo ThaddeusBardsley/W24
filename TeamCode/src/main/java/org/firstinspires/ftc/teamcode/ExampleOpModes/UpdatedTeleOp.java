@@ -133,10 +133,6 @@ public class UpdatedTeleOp extends OpMode
             casie.setPosition(0);
         }
 
-
-
-
-
         if (gamepad2.dpad_left) {
             jamie.setPosition(-1);
         }

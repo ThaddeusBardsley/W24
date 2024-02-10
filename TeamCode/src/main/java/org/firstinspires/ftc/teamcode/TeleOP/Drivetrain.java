@@ -6,6 +6,7 @@ import static org.firstinspires.ftc.teamcode.Utilities.OpModeUtils.setOpMode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.Utilities.Gyro;
 
@@ -14,6 +15,10 @@ public class Drivetrain {
     DcMotor fr;
     DcMotor bl;
     DcMotor br;
+
+    Servo casie;
+    Servo jamie;
+
     public Gyro gyro;
     public Drivetrain(){
 
@@ -34,6 +39,7 @@ public class Drivetrain {
         fr.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         br.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         bl.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
     }
 
 
@@ -101,6 +107,17 @@ public class Drivetrain {
             }
         }
     }
+
+    public void clawExtend(double extend) {
+        gyro.update();
+        casie.setPosition(extend);
+        jamie.setPosition(extend);
+
+        multTelemetry.addData("extention", "running");
+
+    }
+
+
 
     }
 
