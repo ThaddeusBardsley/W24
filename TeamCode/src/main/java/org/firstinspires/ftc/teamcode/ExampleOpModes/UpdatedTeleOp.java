@@ -150,11 +150,11 @@ public class UpdatedTeleOp extends OpMode
         }
 
         if (gamepad2.left_bumper) {
-            servo.setPosition(1);
+            servo.setPosition(0.25);
         }
 
         if (gamepad2.right_bumper) {
-            servo.setPosition(-1);
+            servo.setPosition(1);
         }
 
         if (gamepad2.left_trigger > .5 /*&& leftslides.getCurrentPosition() < 0  */) {
