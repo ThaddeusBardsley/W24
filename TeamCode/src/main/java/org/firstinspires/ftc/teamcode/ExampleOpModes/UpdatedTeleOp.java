@@ -195,17 +195,29 @@ public class UpdatedTeleOp extends OpMode
 //        }
 
 
-        if (driver1.get(RB2,TAP)) {
-            slidesPos += 100;
+//        if (driver2.get(RB2,TAP)) {
+//            slidesPos += 250;
+//        }
+//
+//        if (driver2.get(LB2,TAP)) {
+//            slidesPos -= 250;
+//        }
+//        leftSlides.setTargetPosition(slidesPos);
+//        rightSlides.setTargetPosition(slidesPos);
+
+
+        if (gamepad2.right_trigger > .5) {
+            leftSlides.setTargetPosition(1500);
+            rightSlides.setTargetPosition(1500);
         }
 
-        if (driver1.get(LB2,TAP)) {
-            slidesPos -= 100;
+        if (gamepad2.left_trigger > .5) {
+            leftSlides.setTargetPosition(100);
+            rightSlides.setTargetPosition(100);
         }
 
-        leftSlides.setTargetPosition(slidesPos);
-        rightSlides.setTargetPosition(slidesPos);
-
+        telemetry.addData("leftslide pos", leftSlides.getCurrentPosition());
+        telemetry.addData("rightslide pos", rightSlides.getCurrentPosition());
         telemetry.addData("Yellow Pos", yellow.getPosition());
         telemetry.addData("Blue Pos", blue.getPosition());
        telemetry.addData("heading", drivetrain.gyro.getHeading());
