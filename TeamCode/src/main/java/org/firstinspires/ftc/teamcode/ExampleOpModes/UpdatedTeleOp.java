@@ -173,7 +173,7 @@ public class UpdatedTeleOp extends OpMode
         // this code accounts for the stupid offset that the diffrences in the servos make.
         double armOffset = 0.025;
         double loadingPosition = 0.1;
-        double lowScoringPosition = 0.9;
+        double lowScoringPosition = 0.95;
         double highScoringPosition = 0.75;
         if (gamepad2.dpad_down) {
             blue.setPosition(loadingPosition);
