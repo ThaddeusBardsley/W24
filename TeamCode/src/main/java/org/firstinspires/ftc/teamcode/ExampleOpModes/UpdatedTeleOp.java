@@ -36,11 +36,11 @@ public class UpdatedTeleOp extends OpMode
     private Servo casie = null;
     private Servo yellow = null;
     private Servo blue = null;
-    private DcMotor leftslides = null;
-    private DcMotor rightslides = null;
+    private DcMotor leftSlides = null;
+    private DcMotor rightSlides = null;
     //private DcMotor karl = null;
     //DcMotor karl2;
-
+    int slidesPos = 0;
     int position1 = 0;
     int position2 = 1000;
     int position3 = 2000;
@@ -58,13 +58,20 @@ public class UpdatedTeleOp extends OpMode
         telemetry.addData("Status", "init");
         drivetrain = new Drivetrain();
 
-        leftslides = hardwareMap.get(DcMotor.class, "leftslides");
-        leftslides.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        leftslides.setMode(DcMotor.RunMode.RUN_WITH_ENCODER);
+        rightSlides = hardwareMap.get(DcMotor.class, "rightslides");
+        rightSlides.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightSlides.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightSlides.setTargetPosition(0);
+        rightSlides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightSlides.setPower(1);
 
-        rightslides = hardwareMap.get(DcMotor.class, "rightslides");
-        rightslides.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightslides.setMode(DcMotor.RunMode.RUN_WITH_ENCODER);
+
+        leftSlides = hardwareMap.get(DcMotor.class, "leftslides");
+        leftSlides.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftSlides.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftSlides.setTargetPosition(0);
+        leftSlides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftSlides.setPower(1);
 
         //karl  = hardwareMap.get(DcMotor.class, "karl");
         //karl.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -188,23 +195,19 @@ public class UpdatedTeleOp extends OpMode
 //        }
 
 
-        if (gamepad2.right_trigger > .5) {
-            leftslides.setTargetPosition(2800);
-            leftslides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            rightslides.setTargetPosition(2800);
-            rightslides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        if (driver1.get(RB2,TAP)) {
+            slidesPos += 100;
         }
 
-        if (gamepad2.left_trigger > .5 ) {
-            leftslides.setTargetPosition(0);
-            leftslides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            rightslides.setTargetPosition(0);
-            rightslides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        if (driver1.get(LB2,TAP)) {
+            slidesPos -= 100;
         }
+
+        leftSlides.setTargetPosition(slidesPos);
+        rightSlides.setTargetPosition(slidesPos);
 
         telemetry.addData("Yellow Pos", yellow.getPosition());
         telemetry.addData("Blue Pos", blue.getPosition());
-       telemetry.addData("slidepos", leftslides.getCurrentPosition());
        telemetry.addData("heading", drivetrain.gyro.getHeading());
     }
 
