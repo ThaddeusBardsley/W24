@@ -58,20 +58,20 @@ public class UpdatedTeleOp extends OpMode
         telemetry.addData("Status", "init");
         drivetrain = new Drivetrain();
 
-        rightSlides = hardwareMap.get(DcMotor.class, "rightslides");
-        rightSlides.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightSlides.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightSlides.setTargetPosition(0);
-        rightSlides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightSlides.setPower(1);
+        rightSlides = hardwareMap.get(DcMotor.class, "rightSlides");
+//        rightSlides.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        rightSlides.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        rightSlides.setTargetPosition(0);
+//        rightSlides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        rightSlides.setPower(1);
 
 
-        leftSlides = hardwareMap.get(DcMotor.class, "leftslides");
-        leftSlides.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        leftSlides.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        leftSlides.setTargetPosition(0);
-        leftSlides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftSlides.setPower(1);
+        leftSlides = hardwareMap.get(DcMotor.class, "leftSlides");
+//        leftSlides.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        leftSlides.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        leftSlides.setTargetPosition(0);
+//        leftSlides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        leftSlides.setPower(1);
 
         //karl  = hardwareMap.get(DcMotor.class, "karl");
         //karl.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -82,6 +82,8 @@ public class UpdatedTeleOp extends OpMode
 
         driver1 = new Controller(gamepad1);
         driver2 = new Controller(gamepad2);
+
+
     }
 
     /*
@@ -118,12 +120,18 @@ public class UpdatedTeleOp extends OpMode
 
 
         //This changes the speed
+//        double speed = 1;
+//        Point driveStrafePoint = new Point(driver1.get(LEFT,X), driver1.get(LEFT, Y));
+//        driveStrafePoint = MathUtils.shift(driveStrafePoint, Math.toDegrees(drivetrain.gyro.getHeading()));
+//        double drive = driveStrafePoint.y;
+//        double strafe = driveStrafePoint.x;
+//        double turn = driver1.get(RIGHT, INVERT_X);
+
+
         double speed = 1;
-        Point driveStrafePoint = new Point(driver1.get(LEFT,X), driver1.get(LEFT, Y));
-        driveStrafePoint = MathUtils.shift(driveStrafePoint, Math.toDegrees(drivetrain.gyro.getHeading()));
-        double drive = driveStrafePoint.y;
-        double strafe = driveStrafePoint.x;
-        double turn = driver1.get(RIGHT, INVERT_X);
+        double drive = gamepad1.left_stick_y;
+        double strafe = gamepad1.left_stick_x;
+        double turn = gamepad1.right_stick_x * -1;
 
         if (driver1.get(LB2, DOWN)) {
             speed = .5;
@@ -132,6 +140,7 @@ public class UpdatedTeleOp extends OpMode
         if (driver1.get(RB2, DOWN)) {
             speed = .25;
         }
+
 
 
         drivetrain.drive(drive, strafe, turn, speed);
@@ -181,18 +190,18 @@ public class UpdatedTeleOp extends OpMode
 
 
 
-//        if (gamepad2.left_trigger > .5 /*&& leftslides.getCurrentPosition() < 0  */) {
-//            leftslides.setPower(-1);
-//            rightslides.setPower(-1);
-//            //karl.setPower(-1);
-//        } else if (gamepad2.right_trigger > .5 /*&& leftslides.getCurrentPosition() > -2800  */) {
-//            leftslides.setPower(1);
-//            rightslides.setPower(1);
-//            //karl.setPower(1);
-//        } else{
-//            rightslides.setPower(0);
-//            leftslides.setPower(0);
-//        }
+        if (gamepad2.left_trigger > .5 /*&& leftslides.getCurrentPosition() < 0  */) {
+            leftSlides.setPower(-1);
+            rightSlides.setPower(-1);
+            //karl.setPower(-1);
+        } else if (gamepad2.right_trigger > .5 /*&& leftslides.getCurrentPosition() > -2800  */) {
+            leftSlides.setPower(1);
+            rightSlides.setPower(1);
+            //karl.setPower(1);
+        } else{
+            rightSlides.setPower(0.05);
+            leftSlides.setPower(0.05);
+        }
 
 
 //        if (driver2.get(RB2,TAP)) {
@@ -206,15 +215,14 @@ public class UpdatedTeleOp extends OpMode
 //        rightSlides.setTargetPosition(slidesPos);
 
 
-        if (gamepad2.right_trigger > .5) {
-            leftSlides.setTargetPosition(1500);
-            rightSlides.setTargetPosition(1500);
-        }
+//        if (gamepad2.right_trigger > .5) {
+//            leftSlides.setTargetPosition(1500); //broken
+//            rightSlides.setTargetPosition(1500);
+//        } else if (gamepad2.left_trigger > .5) {
+//            leftSlides.setTargetPosition(100);
+//            rightSlides.setTargetPosition(100);
+//        }
 
-        if (gamepad2.left_trigger > .5) {
-            leftSlides.setTargetPosition(100);
-            rightSlides.setTargetPosition(100);
-        }
 
         telemetry.addData("leftslide pos", leftSlides.getCurrentPosition());
         telemetry.addData("rightslide pos", rightSlides.getCurrentPosition());

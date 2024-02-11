@@ -7,6 +7,7 @@ import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -26,6 +27,8 @@ public class LinearAuto extends LinearOpMode {
     Drivetrain drivetrain;
     DcMotor rightSlides;
     DcMotor leftSlides;
+    Servo blue;
+    Servo yellow;
 
     private VisionProcessing visionProcessor = new VisionProcessing();
     private VisionPortal visionPortal;
@@ -49,6 +52,9 @@ public class LinearAuto extends LinearOpMode {
 
         drivetrain = new Drivetrain();
 
+
+        yellow = hardwareMap.get(Servo.class, "yellow");
+        blue = hardwareMap.get(Servo.class, "blue");
 
         rightSlides = hardwareMap.get(DcMotor.class, "rightslides");
         rightSlides.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -118,7 +124,8 @@ public class LinearAuto extends LinearOpMode {
             drivetrain.autoDrive(900,1,0,0.25,0);
             drivetrain.turn(-75,0.5);
             drivetrain.autoDrive(275,-1,0,0.25,0);
-            drivetrain.clawExtend(1);
+            blue.setPosition(0.9);
+            yellow.setPosition(0.9);
 
 
             telemetry.addData("heading", drivetrain.gyro.getHeading());
