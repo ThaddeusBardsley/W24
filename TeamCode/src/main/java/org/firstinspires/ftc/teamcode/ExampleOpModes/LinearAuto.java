@@ -110,7 +110,7 @@ public class LinearAuto extends LinearOpMode {
 
             //TODO CODE
 
-            setSlides(200);
+            setSlides();
             multTelemetry.addData("position", visionProcessor.getTeampropPosition());
             multTelemetry.update();
             drivetrain.autoDrive(1000,1, 0,0.25, 0);
@@ -127,9 +127,9 @@ public class LinearAuto extends LinearOpMode {
         }
         }
 
-        public void setSlides(int pos){
-            leftSlides.setTargetPosition(pos);
-            rightSlides.setTargetPosition(pos);
+        public void setSlides(){
+            leftSlides.setTargetPosition(3000);
+            rightSlides.setTargetPosition(3000);
 
         }
 

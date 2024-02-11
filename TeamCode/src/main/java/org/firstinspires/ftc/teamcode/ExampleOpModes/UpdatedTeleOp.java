@@ -34,8 +34,8 @@ public class UpdatedTeleOp extends OpMode
     private Drivetrain drivetrain = null;
    // public Drivetrain drivetrain;
     private Servo casie = null;
-    private Servo jamie = null;
-    private Servo servo = null;
+    private Servo yellow = null;
+    private Servo blue = null;
     private DcMotor leftslides = null;
     private DcMotor rightslides = null;
     //private DcMotor karl = null;
@@ -70,8 +70,8 @@ public class UpdatedTeleOp extends OpMode
         //karl.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         casie = hardwareMap.get(Servo.class, "casie");
-        servo = hardwareMap.get(Servo.class,"servo");
-        jamie = hardwareMap.get(Servo.class, "jamie");
+        blue = hardwareMap.get(Servo.class,"blue");
+        yellow = hardwareMap.get(Servo.class, "yellow");
 
         driver1 = new Controller(gamepad1);
         driver2 = new Controller(gamepad2);
@@ -109,6 +109,8 @@ public class UpdatedTeleOp extends OpMode
 
         drivetrain.gyro.update();
 
+
+        //This changes the speed
         double speed = 1;
         Point driveStrafePoint = new Point(driver1.get(LEFT,X), driver1.get(LEFT, Y));
         driveStrafePoint = MathUtils.shift(driveStrafePoint, Math.toDegrees(drivetrain.gyro.getHeading()));
@@ -124,7 +126,7 @@ public class UpdatedTeleOp extends OpMode
             speed = .25;
         }
 
-        //This changes the speed
+
         drivetrain.drive(drive, strafe, turn, speed);
 
         if (gamepad2.a) {
@@ -133,29 +135,37 @@ public class UpdatedTeleOp extends OpMode
             casie.setPosition(0);
         }
 
-        if (gamepad2.dpad_left) {
-            jamie.setPosition(-1);
-        }
 
-        if (gamepad2.dpad_down) {
-            jamie.setPosition(0.5);
-        }
 
-        if (gamepad2.dpad_up) {
-            jamie.setPosition(0.75);
-        }
+//        //claw loading
+//        if (gamepad2.left_bumper) {
+//            double blueLoading = 0.075;
+//            blue.setPosition(blueLoading);  // -1 blue  offset of 0.075
+//            double yellowLoading = 0.9;
+//            yellow.setPosition(yellowLoading); //1 yellow 0.975  offset of 0.1
+//        }
+//
+//        // claw scoring
+//        if (gamepad2.right_bumper) {
+//            double blueScoring= 0.975;
+//            blue.setPosition(blueScoring); //1 blue 0.975  offset of 0.025
+//            double yellowScoring = 0;
+//            yellow.setPosition(yellowScoring); //-1 yellow  offset of zero
+//        }
 
-        if (gamepad2.dpad_right) {
-            jamie.setPosition(1);
-        }
-
+        double armOffset = 0.025;
+        double loadingPosition = 1;
+        double scoringPosition = 0.2;
         if (gamepad2.left_bumper) {
-            servo.setPosition(0.25);
+            blue.setPosition(1 - loadingPosition);
+            yellow.setPosition(loadingPosition - armOffset);
+        }
+        if (gamepad2.right_bumper) {
+            blue.setPosition(1 - scoringPosition);
+            yellow.setPosition(scoringPosition - armOffset);
         }
 
-        if (gamepad2.right_bumper) {
-            servo.setPosition(0.80);
-        }
+
 
         if (gamepad2.left_trigger > .5 /*&& leftslides.getCurrentPosition() < 0  */) {
             leftslides.setPower(-1);
@@ -170,6 +180,8 @@ public class UpdatedTeleOp extends OpMode
             leftslides.setPower(0);
         }
 
+        telemetry.addData("Yellow Pos", yellow.getPosition());
+        telemetry.addData("Blue Pos", blue.getPosition());
        telemetry.addData("slidepos", leftslides.getCurrentPosition());
        telemetry.addData("heading", drivetrain.gyro.getHeading());
     }

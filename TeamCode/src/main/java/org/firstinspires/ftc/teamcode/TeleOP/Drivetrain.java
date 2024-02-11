@@ -16,8 +16,8 @@ public class Drivetrain {
     DcMotor bl;
     DcMotor br;
 
-    Servo casie;
-    Servo jamie;
+    Servo blue;
+    Servo yellow;
 
     public Gyro gyro;
     public Drivetrain(){
@@ -110,8 +110,8 @@ public class Drivetrain {
 
     public void clawExtend(double extend) {
         gyro.update();
-        casie.setPosition(extend);
-        jamie.setPosition(extend);
+        blue.setPosition(extend);
+        yellow.setPosition(extend);
 
         multTelemetry.addData("extention", "running");
 
