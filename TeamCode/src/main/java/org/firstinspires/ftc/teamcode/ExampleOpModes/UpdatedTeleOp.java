@@ -154,7 +154,7 @@ public class UpdatedTeleOp extends OpMode
 //        }
 
         double armOffset = 0.025;
-        double loadingPosition = 0;
+        double loadingPosition = 0.1;
         double lowScoringPosition = 0.9;
         double highScoringPosition = 0.75;
         if (gamepad2.dpad_down) {
