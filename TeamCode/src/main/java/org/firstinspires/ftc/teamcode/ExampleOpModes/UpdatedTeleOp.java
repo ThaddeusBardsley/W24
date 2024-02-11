@@ -153,6 +153,8 @@ public class UpdatedTeleOp extends OpMode
 //            yellow.setPosition(yellowScoring); //-1 yellow  offset of zero
 //        }
 
+
+        // this code accounts for the stupid offset that the diffrences in the servos make.
         double armOffset = 0.025;
         double loadingPosition = 0.1;
         double lowScoringPosition = 0.9;
