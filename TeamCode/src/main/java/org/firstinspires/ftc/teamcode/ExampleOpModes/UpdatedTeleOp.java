@@ -60,11 +60,11 @@ public class UpdatedTeleOp extends OpMode
 
         leftslides = hardwareMap.get(DcMotor.class, "leftslides");
         leftslides.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        leftslides.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftslides.setMode(DcMotor.RunMode.RUN_WITH_ENCODER);
 
         rightslides = hardwareMap.get(DcMotor.class, "rightslides");
         rightslides.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightslides.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightslides.setMode(DcMotor.RunMode.RUN_WITH_ENCODER);
 
         //karl  = hardwareMap.get(DcMotor.class, "karl");
         //karl.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -174,17 +174,32 @@ public class UpdatedTeleOp extends OpMode
 
 
 
-        if (gamepad2.left_trigger > .5 /*&& leftslides.getCurrentPosition() < 0  */) {
-            leftslides.setPower(-1);
-            rightslides.setPower(-1);
-            //karl.setPower(-1);
-        } else if (gamepad2.right_trigger > .5 /*&& leftslides.getCurrentPosition() > -2800  */) {
-            leftslides.setPower(1);
-            rightslides.setPower(1);
-            //karl.setPower(1);
-        } else{
-            rightslides.setPower(0);
-            leftslides.setPower(0);
+//        if (gamepad2.left_trigger > .5 /*&& leftslides.getCurrentPosition() < 0  */) {
+//            leftslides.setPower(-1);
+//            rightslides.setPower(-1);
+//            //karl.setPower(-1);
+//        } else if (gamepad2.right_trigger > .5 /*&& leftslides.getCurrentPosition() > -2800  */) {
+//            leftslides.setPower(1);
+//            rightslides.setPower(1);
+//            //karl.setPower(1);
+//        } else{
+//            rightslides.setPower(0);
+//            leftslides.setPower(0);
+//        }
+
+
+        if (gamepad2.right_trigger > .5) {
+            leftslides.setTargetPosition(2800);
+            leftslides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rightslides.setTargetPosition(2800);
+            rightslides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        }
+
+        if (gamepad2.left_trigger > .5 ) {
+            leftslides.setTargetPosition(0);
+            leftslides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rightslides.setTargetPosition(0);
+            rightslides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         }
 
         telemetry.addData("Yellow Pos", yellow.getPosition());

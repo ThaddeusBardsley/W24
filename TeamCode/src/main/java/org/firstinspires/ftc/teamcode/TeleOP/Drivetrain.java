@@ -109,7 +109,6 @@ public class Drivetrain {
     }
 
     public void clawExtend(double extend) {
-        gyro.update();
         blue.setPosition(extend);
         yellow.setPosition(extend);
 

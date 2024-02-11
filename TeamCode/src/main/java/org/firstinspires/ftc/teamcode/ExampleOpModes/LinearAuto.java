@@ -118,7 +118,7 @@ public class LinearAuto extends LinearOpMode {
             drivetrain.autoDrive(900,1,0,0.25,0);
             drivetrain.turn(-75,0.5);
             drivetrain.autoDrive(275,-1,0,0.25,0);
-            drivetrain.clawExtend(0.8);
+            drivetrain.clawExtend(1);
 
 
             telemetry.addData("heading", drivetrain.gyro.getHeading());
