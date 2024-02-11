@@ -154,15 +154,20 @@ public class UpdatedTeleOp extends OpMode
 //        }
 
         double armOffset = 0.025;
-        double loadingPosition = 1;
-        double scoringPosition = 0.2;
-        if (gamepad2.left_bumper) {
-            blue.setPosition(1 - loadingPosition);
-            yellow.setPosition(loadingPosition - armOffset);
+        double loadingPosition = 0;
+        double lowScoringPosition = 0.9;
+        double highScoringPosition = 0.75;
+        if (gamepad2.dpad_down) {
+            blue.setPosition(loadingPosition);
+            yellow.setPosition(1 - loadingPosition - armOffset);
         }
-        if (gamepad2.right_bumper) {
-            blue.setPosition(1 - scoringPosition);
-            yellow.setPosition(scoringPosition - armOffset);
+        if (gamepad2.dpad_left) {
+            blue.setPosition(lowScoringPosition);
+            yellow.setPosition(1 - lowScoringPosition - armOffset);
+        }
+        if (gamepad2.dpad_up) {
+            blue.setPosition(highScoringPosition);
+            yellow.setPosition(1 - highScoringPosition - armOffset);
         }
 
 
