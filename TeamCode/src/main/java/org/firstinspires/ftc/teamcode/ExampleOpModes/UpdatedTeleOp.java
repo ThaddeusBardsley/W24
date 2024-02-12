@@ -36,6 +36,7 @@ public class UpdatedTeleOp extends OpMode
     private Servo casie = null;
     private Servo yellow = null;
     private Servo blue = null;
+    Servo claw;
     private DcMotor leftSlides = null;
     private DcMotor rightSlides = null;
     //private DcMotor karl = null;
@@ -79,6 +80,7 @@ public class UpdatedTeleOp extends OpMode
         casie = hardwareMap.get(Servo.class, "casie");
         blue = hardwareMap.get(Servo.class,"blue");
         yellow = hardwareMap.get(Servo.class, "yellow");
+        claw = hardwareMap.get(Servo.class, "claw");
 
         driver1 = new Controller(gamepad1);
         driver2 = new Controller(gamepad2);
@@ -172,10 +174,10 @@ public class UpdatedTeleOp extends OpMode
 
         // this code accounts for the stupid offset that the diffrences in the servos make.
         double armOffset = 0.025;
-        double loadingPosition = 0.1;
+        double loadingPosition = 0.04;
         double lowScoringPosition = 0.95;
         double highScoringPosition = 0.75;
-        if (gamepad2.dpad_down) {
+        if (gamepad2.dpad_down && rightSlides.getCurrentPosition() < 50) {
             blue.setPosition(loadingPosition);
             yellow.setPosition(1 - loadingPosition - armOffset);
         }
@@ -190,11 +192,11 @@ public class UpdatedTeleOp extends OpMode
 
 
 
-        if (gamepad2.left_trigger > .5 /*&& leftslides.getCurrentPosition() < 0  */) {
+        if (gamepad2.left_trigger > .5) {
             leftSlides.setPower(-1);
             rightSlides.setPower(-1);
             //karl.setPower(-1);
-        } else if (gamepad2.right_trigger > .5 /*&& leftslides.getCurrentPosition() > -2800  */) {
+        } else if (gamepad2.right_trigger > .5) {
             leftSlides.setPower(1);
             rightSlides.setPower(1);
             //karl.setPower(1);
@@ -203,6 +205,12 @@ public class UpdatedTeleOp extends OpMode
             leftSlides.setPower(0.05);
         }
 
+
+        if (gamepad2.left_bumper) {
+            claw.setPosition(1);
+        } else if (gamepad2.right_bumper) {
+            claw.setPosition(.5);
+        }
 
 //        if (driver2.get(RB2,TAP)) {
 //            slidesPos += 250;
