@@ -192,14 +192,13 @@ public class UpdatedTeleOp extends OpMode
 
 
 
-        if (gamepad2.left_trigger > .5) {
+        if (gamepad2.left_bumper) {
             leftSlides.setPower(-1);
             rightSlides.setPower(-1);
-            //karl.setPower(-1);
-        } else if (gamepad2.right_trigger > .5) {
+        } else if (gamepad2.right_bumper) {
             leftSlides.setPower(1);
             rightSlides.setPower(1);
-            //karl.setPower(1);
+
         } else if (gamepad2.y) {
             leftSlides.setPower(-0.5);
             rightSlides.setPower(-0.5);
@@ -211,9 +210,9 @@ public class UpdatedTeleOp extends OpMode
 
 
 
-        if (gamepad2.left_bumper) {
+        if (gamepad2.left_trigger > .5) {
             claw.setPosition(.95); //open
-        } else if (gamepad2.right_bumper) {
+        } else if (gamepad2.right_trigger > .5) {
             claw.setPosition(.5); //close
         }
 

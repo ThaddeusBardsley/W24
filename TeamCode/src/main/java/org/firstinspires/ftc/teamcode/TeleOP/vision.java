@@ -67,8 +67,8 @@ VisionPipelineRed pipeline = new VisionPipelineRed();
     @Override
     public void loop() {
 
-        telemetry.update();
-        telemetry.addData("position", visionProcessor.getTeampropPosition());
 
+        telemetry.addData("position", visionProcessor.getTeampropPosition());
+        telemetry.update();
     }
 }

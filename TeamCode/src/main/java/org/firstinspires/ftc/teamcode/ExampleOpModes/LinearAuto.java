@@ -118,32 +118,46 @@ public class LinearAuto extends LinearOpMode {
 
             //TODO CODE
 
-//
-////            claw.setPosition(1);
+//            blue.setPosition(0.5);
+//            yellow.setPosition(0.5);
+//            claw.setPosition(0.5);
 //            drivetrain.autoDrive(1000,1, 0,0.25, 0);
 //            drivetrain.turn(90,0.5);
-////            setSlides();
-////            blue.setPosition(0.25);
-////            yellow.setPosition(0.25);
+//            leftSlides.setTargetPosition(1000);
+//            rightSlides.setTargetPosition(1000);
+//            blue.setPosition(1);
+//            yellow.setPosition(0);
 //            drivetrain.autoDrive(900,1,0,0.25,0);
-//            drivetrain.turn(-75,0.5);
-//            drivetrain.autoDrive(275,-1,0,0.25,0);
+//            drivetrain.turn(-55,0.5);
+//            drivetrain.autoDrive(500,-1,0,0.25,0);
+//            claw.setPosition(1);
+//            wait(2);
+//            blue.setPosition(0.1);
+//            yellow.setPosition(0.9);
+//            drivetrain.autoDrive(300,1,0,0.25,0);
+//            wait(2);
+//            drivetrain.autoDrive(400,-1,0,0.25,0);
 
 
-            blue.setPosition(1);
-            yellow.setPosition(1);
-            claw.setPosition(0.5);
-            drivetrain.autoDrive(1000,1, 0,0.25, 0);
-            drivetrain.turn(90,0.5);
-            leftSlides.setTargetPosition(2200);
-            rightSlides.setTargetPosition(2000);
-            drivetrain.autoDrive(900,1,0,0.25,0);
-            drivetrain.turn(-55,0.5);
-            drivetrain.autoDrive(500,-1,0,0.25,0);
-            claw.setPosition(1);
-            wait(2);
-            drivetrain.autoDrive(500,1,0,0.25,0);
-
+                blue.setPosition(0.5);
+                yellow.setPosition(0.5);
+                claw.setPosition(0.5);
+                drivetrain.autoDrive(1100,1, 0,0.25, 0);
+                drivetrain.turn(90,0.5);
+                leftSlides.setTargetPosition(1000);
+                rightSlides.setTargetPosition(1000);
+                blue.setPosition(1);
+                yellow.setPosition(0);
+                drivetrain.autoDrive(900,1,0,0.25,0);
+                drivetrain.turn(-55,0.5);
+                drivetrain.autoDrive(500,-1,0,0.25,0);
+                claw.setPosition(1);
+                wait(2);
+                blue.setPosition(0.1);
+                yellow.setPosition(0.9);
+                drivetrain.autoDrive(300,1,0,0.25,0);
+                wait(2);
+                drivetrain.autoDrive(400,-1,0,0.25,0);
 
 
             multTelemetry.addData("position", visionProcessor.getTeampropPosition());
