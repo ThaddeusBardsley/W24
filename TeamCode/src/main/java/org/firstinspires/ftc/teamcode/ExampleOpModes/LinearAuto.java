@@ -118,16 +118,32 @@ public class LinearAuto extends LinearOpMode {
 
             //TODO CODE
 
-//            setSlides();
-//            claw.setPosition(1);
-//            blue.setPosition(0.25);
-//            yellow.setPosition(0.25);
+//
+////            claw.setPosition(1);
+//            drivetrain.autoDrive(1000,1, 0,0.25, 0);
+//            drivetrain.turn(90,0.5);
+////            setSlides();
+////            blue.setPosition(0.25);
+////            yellow.setPosition(0.25);
+//            drivetrain.autoDrive(900,1,0,0.25,0);
+//            drivetrain.turn(-75,0.5);
+//            drivetrain.autoDrive(275,-1,0,0.25,0);
 
+
+            blue.setPosition(1);
+            yellow.setPosition(1);
+            claw.setPosition(0.5);
             drivetrain.autoDrive(1000,1, 0,0.25, 0);
             drivetrain.turn(90,0.5);
+            leftSlides.setTargetPosition(2200);
+            rightSlides.setTargetPosition(2000);
             drivetrain.autoDrive(900,1,0,0.25,0);
-            drivetrain.turn(-75,0.5);
-            drivetrain.autoDrive(275,-1,0,0.25,0);
+            drivetrain.turn(-55,0.5);
+            drivetrain.autoDrive(500,-1,0,0.25,0);
+            claw.setPosition(1);
+            wait(2);
+            drivetrain.autoDrive(500,1,0,0.25,0);
+
 
 
             multTelemetry.addData("position", visionProcessor.getTeampropPosition());
