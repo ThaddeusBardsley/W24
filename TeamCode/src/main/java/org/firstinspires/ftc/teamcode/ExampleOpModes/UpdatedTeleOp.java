@@ -195,21 +195,17 @@ public class UpdatedTeleOp extends OpMode
         if (gamepad2.left_bumper) {
             leftSlides.setPower(-1);
             rightSlides.setPower(-1);
-        } else if (gamepad2.right_bumper) {
+        } else if (gamepad2.right_bumper && yellow.getPosition() < 0.90) {
             leftSlides.setPower(1);
             rightSlides.setPower(1);
 
         } else if (gamepad2.y) {
             leftSlides.setPower(-0.5);
             rightSlides.setPower(-0.5);
-        } else if (blue.getPosition() == loadingPosition){
-            leftSlides.setPower(0);
-            rightSlides.setPower(0);
         } else {
             rightSlides.setPower(0.05);
             leftSlides.setPower(0.05);
             }
-
 
 
         if (gamepad2.left_trigger > .5) {
