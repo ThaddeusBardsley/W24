@@ -177,7 +177,7 @@ public class UpdatedTeleOp extends OpMode
         double loadingPosition = 0.04;
         double lowScoringPosition = 0.95;
         double highScoringPosition = 0.75;
-        if (gamepad2.dpad_down && rightSlides.getCurrentPosition() < 50) {
+        if (gamepad2.dpad_down && rightSlides.getCurrentPosition() < 15) {
             blue.setPosition(loadingPosition);
             yellow.setPosition(1 - loadingPosition - armOffset);
         }
@@ -200,16 +200,21 @@ public class UpdatedTeleOp extends OpMode
             leftSlides.setPower(1);
             rightSlides.setPower(1);
             //karl.setPower(1);
-        } else{
+        } else if (gamepad2.y) {
+            leftSlides.setPower(-0.5);
+            rightSlides.setPower(-0.5);
+        } else {
             rightSlides.setPower(0.05);
             leftSlides.setPower(0.05);
         }
 
 
+
+
         if (gamepad2.left_bumper) {
-            claw.setPosition(1);
+            claw.setPosition(.95); //open
         } else if (gamepad2.right_bumper) {
-            claw.setPosition(.5);
+            claw.setPosition(.5); //close
         }
 
 //        if (driver2.get(RB2,TAP)) {

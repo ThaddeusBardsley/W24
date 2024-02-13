@@ -29,6 +29,7 @@ public class LinearAuto extends LinearOpMode {
     DcMotor leftSlides;
     Servo blue;
     Servo yellow;
+    Servo claw;
 
     private VisionProcessing visionProcessor = new VisionProcessing();
     private VisionPortal visionPortal;
@@ -55,8 +56,9 @@ public class LinearAuto extends LinearOpMode {
 
         yellow = hardwareMap.get(Servo.class, "yellow");
         blue = hardwareMap.get(Servo.class, "blue");
+        claw = hardwareMap.get(Servo.class, "claw");
 
-        rightSlides = hardwareMap.get(DcMotor.class, "rightslides");
+        rightSlides = hardwareMap.get(DcMotor.class, "rightSlides");
         rightSlides.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightSlides.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightSlides.setTargetPosition(0);
@@ -64,7 +66,7 @@ public class LinearAuto extends LinearOpMode {
         rightSlides.setPower(1);
 
 
-        leftSlides = hardwareMap.get(DcMotor.class, "leftslides");
+        leftSlides = hardwareMap.get(DcMotor.class, "leftSlides");
         leftSlides.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftSlides.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         leftSlides.setTargetPosition(0);
@@ -116,18 +118,19 @@ public class LinearAuto extends LinearOpMode {
 
             //TODO CODE
 
-            setSlides();
-            multTelemetry.addData("position", visionProcessor.getTeampropPosition());
-            multTelemetry.update();
+//            setSlides();
+//            claw.setPosition(1);
+//            blue.setPosition(0.25);
+//            yellow.setPosition(0.25);
+
             drivetrain.autoDrive(1000,1, 0,0.25, 0);
             drivetrain.turn(90,0.5);
             drivetrain.autoDrive(900,1,0,0.25,0);
             drivetrain.turn(-75,0.5);
             drivetrain.autoDrive(275,-1,0,0.25,0);
-            blue.setPosition(0.9);
-            yellow.setPosition(0.9);
 
 
+            multTelemetry.addData("position", visionProcessor.getTeampropPosition());
             telemetry.addData("heading", drivetrain.gyro.getHeading());
             telemetry.update();
 
@@ -135,8 +138,8 @@ public class LinearAuto extends LinearOpMode {
         }
 
         public void setSlides(){
-            leftSlides.setTargetPosition(3000);
-            rightSlides.setTargetPosition(3000);
+            leftSlides.setTargetPosition(1500);
+            rightSlides.setTargetPosition(1500);
 
         }
 
