@@ -147,12 +147,13 @@ public class UpdatedTeleOp extends OpMode
 
         drivetrain.drive(drive, strafe, turn, speed);
 
-        if (gamepad2.a) {
-            casie.setPosition(0.75);
-        } else{
-            casie.setPosition(0);
-        }
 
+
+        if (gamepad2.x){
+            casie.setPosition(1);
+        } else if (gamepad2.b) {
+            casie.setPosition(0.5);
+        }
 
 
 //        //claw loading
