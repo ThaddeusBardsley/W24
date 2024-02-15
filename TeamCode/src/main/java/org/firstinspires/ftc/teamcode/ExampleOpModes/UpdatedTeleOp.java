@@ -150,9 +150,9 @@ public class UpdatedTeleOp extends OpMode
 
 
         if (gamepad2.x){
-            casie.setPosition(1);
+            casie.setPosition(0.915);
         } else if (gamepad2.b) {
-            casie.setPosition(0.5);
+            casie.setPosition(0.75);
         }
 
 
