@@ -37,6 +37,7 @@ public class UpdatedTeleOp extends OpMode
     private Servo yellow = null;
     private Servo blue = null;
     Servo claw;
+    private DcMotor lift = null;
     private DcMotor leftSlides = null;
     private DcMotor rightSlides = null;
     //private DcMotor karl = null;
@@ -46,6 +47,7 @@ public class UpdatedTeleOp extends OpMode
     int position2 = 1000;
     int position3 = 2000;
     int position4 = 3000;
+    boolean climbed;
 
     Controller driver1;
     Controller driver2;
@@ -76,6 +78,8 @@ public class UpdatedTeleOp extends OpMode
 
         //karl  = hardwareMap.get(DcMotor.class, "karl");
         //karl.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        lift = hardwareMap.get(DcMotor.class, "lift");
 
         casie = hardwareMap.get(Servo.class, "casie");
         blue = hardwareMap.get(Servo.class,"blue");
@@ -178,7 +182,7 @@ public class UpdatedTeleOp extends OpMode
         double loadingPosition = 0.04;
         double lowScoringPosition = 0.95;
         double highScoringPosition = 0.75;
-        if (gamepad2.dpad_down && rightSlides.getCurrentPosition() < 30) {
+        if (gamepad2.dpad_down && rightSlides.getCurrentPosition() < 10) {
             blue.setPosition(loadingPosition);
             yellow.setPosition(1 - loadingPosition - armOffset);
         }
@@ -191,6 +195,12 @@ public class UpdatedTeleOp extends OpMode
             yellow.setPosition(1 - highScoringPosition - armOffset);
         }
 
+        //lift
+        if (gamepad1.right_bumper && gamepad1.a) {
+            lift.setPower(-1);
+        } else {
+            lift.setPower(0);
+        }
 
 
         if (gamepad2.right_bumper) {
