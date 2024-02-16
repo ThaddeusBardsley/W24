@@ -199,7 +199,7 @@ public class UpdatedTeleOp extends OpMode
         if (gamepad1.right_bumper) {
             lift.setPower(-1);
         } else {
-            lift.setPower(0);
+            lift.setPower(-0.05);
         }
 
 
