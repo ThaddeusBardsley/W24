@@ -21,8 +21,8 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
 
-@Autonomous(name="Basic: Linear OpMode", group="Linear OpMode")
-public class LinearAuto extends LinearOpMode {
+@Autonomous(name="RedAuto", group="Linear OpMode")
+public class RedAuto extends LinearOpMode {
 
     Drivetrain drivetrain;
     DcMotor rightSlides;
@@ -138,40 +138,40 @@ public class LinearAuto extends LinearOpMode {
 //            wait(2);
 //            drivetrain.autoDrive(400,-1,0,0.25,0);
 
-                claw.setPosition(0.4);
-                blue.setPosition(1);
-                yellow.setPosition(0);
-                drivetrain.autoDrive(1150,1, 0,0.25, 0);
-                drivetrain.turn(90,0.5);
-                leftSlides.setTargetPosition(1000);
-                rightSlides.setTargetPosition(1000);
-                drivetrain.autoDrive(900,1,0,0.25,0);
-                drivetrain.turn(-60,0.5);
-                drivetrain.autoDrive(500,-1,0,0.25,0);
-                //wait(6);
-                claw.setPosition(1);
-                wait(2);
-                blue.setPosition(0.1);
-                yellow.setPosition(0.9);
-                drivetrain.autoDrive(300,1,0,0.25,0);
-                drivetrain.autoDrive(600,-1,0,0.25,0);
+            claw.setPosition(0.4);
+            blue.setPosition(1);
+            yellow.setPosition(0);
+            drivetrain.autoDrive(1150,1, 0,0.25, 0);
+            drivetrain.turn(-90,0.5);
+            leftSlides.setTargetPosition(1000);
+            rightSlides.setTargetPosition(1000);
+            drivetrain.autoDrive(900,1,0,0.25,0);
+            drivetrain.turn(70,0.5);
+            drivetrain.autoDrive(500,-1,0,0.25,0);
+            //wait(6);
+            claw.setPosition(1);
+            wait(2);
+            blue.setPosition(0.1);
+            yellow.setPosition(0.9);
+            drivetrain.autoDrive(300,1,0,0.25,0);
+            drivetrain.autoDrive(600,-1,0,0.25,0);
             while (opModeIsActive());
 
         }
+    }
+
+    public void setSlides(){
+        leftSlides.setTargetPosition(1500);
+        rightSlides.setTargetPosition(1500);
+
+    }
+
+    public void wait(int seconds){
+        ElapsedTime time = new ElapsedTime();
+        while(time.seconds() < seconds){
+
         }
-
-        public void setSlides(){
-            leftSlides.setTargetPosition(1500);
-            rightSlides.setTargetPosition(1500);
-
-        }
-
-        public void wait(int seconds){
-            ElapsedTime time = new ElapsedTime();
-            while(time.seconds() < seconds){
-
-            }
-        }
+    }
 
 }
 
