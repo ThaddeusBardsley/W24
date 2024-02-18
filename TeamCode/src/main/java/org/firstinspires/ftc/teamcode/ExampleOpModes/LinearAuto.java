@@ -155,6 +155,7 @@ public class LinearAuto extends LinearOpMode {
                 yellow.setPosition(0.9);
                 drivetrain.autoDrive(300,1,0,0.25,0);
                 drivetrain.autoDrive(600,-1,0,0.25,0);
+
             while (opModeIsActive());
 
         }
