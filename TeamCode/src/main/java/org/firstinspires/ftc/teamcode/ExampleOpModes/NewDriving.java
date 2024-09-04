@@ -95,7 +95,7 @@ public class NewDriving extends OpMode
         double reverse = gamepad1.left_trigger;
 
         drivetrain.drive(drive, strafe, turn, speed);
-        drivetrain.reverse(reverse, strafe, turn, speed);
+        //drivetrain.reverse(reverse, strafe, turn, speed);
     }
 
     /*
